@@ -4,11 +4,11 @@ page_load_js: "assets/js/main.js"
 params:
   palette: yellow
   header:
-    title: Jakub Jaworski
-    tagline: Jakub thebugger blog 
-    logo_img: "images/logo.svg"
+    title: thebugger.io
+    tagline: Blog created out of passion for Software Testing
+    logo_img: "images/logo6.svg"
     logo_img_alt: Jakub Jaworski
-    background_img: "images/header-bg.jpg"
+    background_img: "images/mallorca.jpg"
     has_nav: true
     nav_links:
       - label: Home

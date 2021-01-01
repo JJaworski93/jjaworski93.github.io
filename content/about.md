@@ -2,16 +2,22 @@
 title: About Me
 subtitle: >-
   This is a short page about me and my work
-img_path: images/about.jpg
+img_path: images/mallorca.jpg
 layout: page
 ---
 
-**John Doe** is a Senior Art Director from [Stockholm](https://en.wikipedia.org/wiki/Stockholm), Sweden. After graduating from The College of Visual Arts with a degree in Communication Design, he worked for three small graphic design shops where he honed his design style and sensibility.
+My name is **Jakub Jaworski**. I work as an *Automation Developer* and *Test Engineer* at Entain.
 
-His work has been recognized by Communication Arts, Print, How, ID, IdN, AIGA, Effie, Archive, Graphis, AdFed and Rockport. Graphic Design USA named him a person to watch in 2019.
+This blog was invented out of passion for Automated Software Testing and everything what is related to it.
 
->The world always seems brighter when you’ve just made something that wasn’t there before. <cite>Neil Gaiman</cite>
+>If debugging is the process of removing bugs, then programming must be the process of putting them in. <cite>Edsger Dijkstra</cite>
 
-As a hobby, John Doe authors the most influential design blog in Sweden with over 100,000 page views a month. He lives in Stockholm with his beautiful wife and two boys.
+>There are two ways to write error-free programs; only the third one works.<cite>Alan J. Perlis</cite>
+
+>If you automate a mess, you get an automated mess.<cite>Rod Michael</cite>
+
+>Every code is guilty until constantly proven innocent.<cite>Jakub Jaworski</cite>
+
+I would write more but there is some testing that needs to be done.
 
 *Thank You for reading!*

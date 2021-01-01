@@ -336,7 +336,7 @@ models:
         label: Date
         required: true
       - type: image
-        name: thumb_img_path
+        name: thumb_
         label: Image (Blog Feed)
         description: The image shown in the blog feed
       - type: string
