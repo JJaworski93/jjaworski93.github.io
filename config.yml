@@ -1,5 +1,5 @@
 baseurl: "/"
-title: "Stackbit Fjord Theme"
+title: "thebugger.io testing blog"
 page_load_js: "assets/js/main.js"
 params:
   palette: yellow
