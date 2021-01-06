@@ -1,14 +1,14 @@
 ---
-title: Adding project to GitHub using command line
+title: How to add a project to GitHub using command line
 excerpt: >-
   Creating and adding your project to GitHub can (among others) let you build your portfolio, share your work and collaborate with others.
 date: 2020-12-30
-thumb_img_path: images/nr1.jpg
+thumb_img_path: images/github.jpg
 content_img_path: images/mallorca.jpg
 layout: post
 ---
 
-![Cypress](images/nr1.jpg)
+![Cypress](images/github.jpg)
 
 ##### Creating and adding your project to GitHub can let you build your portfolio, share your work and collaborate with others. Let's start!
 
@@ -26,9 +26,9 @@ _git add ._
 
 _git commit -m "*your commit comment*"_
 
- Now you should add the URL for the remote repository where your local repository will be pushed. At the top of your newely created GitHub repository, you will find the remote repository HTTPS URL. It should look similar to: *ht<span>tps://</span>github.com/yourusername/yourrepositoryname.git*. Copy this URL, as you will need it in the next step. Next step is to **add a remote (github) location** with this command (remember to replace below URL with the URL that you copied in previous step):
+ Now you should add the URL for the remote repository where your local repository will be pushed. At the top of your newely created GitHub repository, you will find the remote repository HTTPS URL. It should look similar to: *ht<span>tps://</span>github.com/yourusername/reponame.git*. Copy this URL, as you will need it in the next step. Next step is to **add a remote (github) location** with this command (remember to replace below URL with the URL that you copied in previous step):
 
-_git remote add origin ht<span>tps://</span>github.com/yourusername/yourrepositoryname.git_
+_git remote add origin ht<span>tps://</span>github.com/yourusername/reponame.git_
 
 Now you can **verify the new remote URL**:
 
@@ -45,4 +45,3 @@ _git push -u origin main_
 instead of: _git push -u origin master_.
 
 Thanks for reading!
-:octocat:
