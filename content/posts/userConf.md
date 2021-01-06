@@ -12,4 +12,4 @@ layout: post
 
 ## Cypress Loreum Ipsum working in progress...
 
-Cypress is an automation....loreumm
+Cypress is an automation....loreummmm
