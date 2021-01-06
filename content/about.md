@@ -14,8 +14,6 @@ This blog was invented out of passion for Automated Software Testing and everyth
 
 >There are two ways to write error-free programs; only the third one works.<cite>Alan J. Perlis</cite>
 
->If you automate a mess, you get an automated mess.<cite>Rod Michael</cite>
-
 >Every code is guilty until constantly proven innocent.<cite>Jakub Jaworski</cite>
 
 I would write more but there is some testing that needs to be done.
