@@ -26,7 +26,7 @@ _git add ._
 
 _git commit -m "*your commit comment*"_
 
- Now you should add the URL for the remote repository where your local repository will be pushed. At the top of your newely created GitHub repository, you will find the remote repository HTTPS URL. It should look similar to: *ht<span>tps://</span>github.com/yourusername/reponame.git*. Copy this URL, as you will need it in the next step. Next step is to **add a remote (github) location** with this command (remember to replace below URL with the URL that you copied in previous step):
+ Now you should add the URL for the remote repository where your local repository will be pushed. At the top of your new GitHub repository, you will find the remote repository HTTPS URL. It should look similar to: *ht<span>tps://</span>github.com/yourusername/reponame.git*. Copy this URL, as you will need it in the next step. Next step is to **add a remote (github) location** with this command (remember to replace below URL with the URL that you copied in previous step):
 
 _git remote add origin ht<span>tps://</span>github.com/yourusername/reponame.git_
 
