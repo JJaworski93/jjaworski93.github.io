@@ -2,7 +2,7 @@
 title: How to add a project to GitHub using command line
 excerpt: >-
   Creating and adding your project to GitHub can (among others) let you build your portfolio, share your work and collaborate with others.
-date: 2020-12-30
+date: 2021-01-07
 thumb_img_path: images/github.jpg
 content_img_path: images/mallorca.jpg
 layout: post
