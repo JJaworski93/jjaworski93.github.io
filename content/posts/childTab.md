@@ -3,12 +3,12 @@ title: Is multi-tab testing supported by Cypress?
 excerpt: >-
   One of the disadvantages of using Cypress is that it does not support multi-tab.. or does it?
 date: 2021-01-29
-thumb_img_path: images/screen.png
+thumb_img_path: images/screen6.png
 content_img_path: images/mallorca.jpg
 layout: post
 ---
 
-![MultiTabs](images/screen.png)
+![MultiTabs](images/screen6.png)
 
 ##### In the previous post I mentioned that Cypress does not support multi-tab testing. But is there anything we can do in some cases? Let's find out.
 
