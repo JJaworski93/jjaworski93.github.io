@@ -97,7 +97,7 @@ if (env.requiresPaymentHistory) {
 
 Now, after we checked that site version is correct and we are logged in, let's place a bet on every platform, using it's own minimum stake value. One of the way of doing that, is to use **clientConfig**:
 
-```JavaScript
+```js
 cy.window()
   .its('clientConfig')
   .then((cfg) => {
