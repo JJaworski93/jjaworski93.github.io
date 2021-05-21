@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+    <head>    
+        
+        <title>Running Cypress Test Script on multiple URLs - thebugger.io testing blog</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="google" content="notranslate" />
+<meta name="description" content="Is it possible to test multiple URLs at once with Cypress? Let&#39;s find out!"/>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/main.css">
+
+
+        
+    </head>
+    <body class="palette-yellow">
+        
+        
+<div id="page" class="site">
+
+  
+
+  
+    
+    <header id="masthead" class="site-header">
+  
+  <div id="header-bg" class="site-header-bg" style="background-image:url('/images/mallorca.jpg')"></div>
+  
+  <div class="site-header-scroll">
+    <div class="site-header-inside">
+      <div class="site-header-vertical">
+        <div class="site-branding">
+  
+  <p class="site-logo">
+    <a href='/'><img src="/images/logo6.svg" alt="Jakub Jaworski" /></a>
+  </p>
+  
+  
+  <p class="site-title"><a href='/'>thebugger.io</a></p>
+  
+  
+  <p class="site-description">Blog created out of passion for Software Testing</p>
+  
+</div><!-- .site-branding -->
+
+        
+<nav id="main-navigation" class="site-navigation" aria-label="Main Navigation">
+  <div class="site-nav-wrap">
+    <div class="site-nav-inside">
+
+      
+      <ul class="menu">
+        
+          
+          
+          <li class="menu-item">
+            <a href="/"
+              
+              >Home</a>
+          </li>
+        
+          
+          
+          <li class="menu-item">
+            <a href="/about"
+              
+              >About</a>
+          </li>
+        
+      </ul>
+      
+
+      
+      <div class="social-links">
+        
+        
+        <a href="https://github.com/JJaworski93"
+           target="_blank"
+           rel="noopener "
+          class="button-circle">
+          
+            
+            
+<svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  
+  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+  
+</svg>
+
+            <span class="screen-reader-text">GitHub</span>
+          
+        </a>
+        
+        
+        
+        <a href="https://www.linkedin.com/in/jakub-jaworski-060261162/"
+           target="_blank"
+           rel="noopener "
+          class="button-circle">
+          
+            
+            
+<svg class="icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  
+  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  
+</svg>
+
+            <span class="screen-reader-text">LinkedIn</span>
+          
+        </a>
+        
+        
+      </div><!-- .social-links -->
+      
+
+    </div><!-- .site-nav-inside -->
+  </div><!-- .site-nav-wrap -->
+</nav><!-- .site-navigation -->
+<button id="menu-toggle" class="menu-toggle"><span class="screen-reader-text">Menu</span><span class="icon-menu" aria-hidden="true"></span></button>
+
+
+      </div><!-- .site-header-vertical -->
+    </div><!-- .site-header-inside -->
+  </div><!-- .site-header-scroll -->
+</header><!-- .site-header -->
+
+  
+
+  <div id="content" class="site-content">
+    <main id="main" class="site-main inner">
+
+      <article class="post post-full">
+        <header class="post-header">
+          <h1 class="post-title">Running Cypress Test Script on multiple URLs</h1>
+          <div class="post-meta">
+            Published on <time class="published"
+              datetime="2021-05-06 00:00">May 06, 2021</time>
+          </div>
+        </header><!-- .post-header -->
+        
+        <div class="post-content">
+          <p><img src="/images/time.png" alt="MultipleURLs"></p>
+<h5 id="today-we-will-create-cypress-testing-script-that-will-be-performed-on-multiple-urls-lets-start">Today we will create Cypress Testing Script that will be performed on multiple URLs. Let&#39;s start!</h5>
+<p>First we need to create <strong>Environment Variables</strong> in <em>cypress.json</em> file. Those variables will store our URLs but also usernames and passwords, needed in login process:</p>
+<pre><code class="language-JSON">{  
+    &quot;ignoreTestFiles&quot;: &quot;*/examples/&quot;,
+    &quot;viewportHeight&quot;: 1080,
+    &quot;viewportWidth&quot;: 1920,
+    &quot;pageLoadTimeout&quot;: 20000,
+    &quot;defaultCommandTimeout&quot;: 8000,
+    &quot;retries&quot;: 3,
+    &quot;env&quot;: {
+        &quot;URL1.be&quot;: {
+           &quot;url&quot;: &quot;https://url1.be&quot;,
+           &quot;username&quot;: &quot;uname&quot;,
+           &quot;password&quot;: &quot;pword&quot;
+        },
+        &quot;URL1.ch&quot;: {
+           &quot;url&quot;: &quot;https://url1.ch&quot;,
+           &quot;username&quot;: &quot;uname&quot;,
+           &quot;password&quot;: &quot;pword&quot;
+        },
+        &quot;URL1.com&quot;: {
+           &quot;url&quot;: &quot;https://url1.com&quot;,
+           &quot;username&quot;: &quot;uname&quot;,
+           &quot;password&quot;: &quot;pword&quot;,
+           &quot;requiresPaymentHistory&quot;: true
+        }
+}</code></pre>
+<p>Now, we can create a <strong>Testing Script</strong> that will be perfomed on all URLs that we specified in our <em>cypress.json</em> file. Let&#39;s say we want to check if <strong>site version</strong> is correct across all our URLs:</p>
+<pre><code class="language-Javascript">describe(&#39;Same Test multiple URLs&#39;, () =&gt; {
+
+    const expectedSiteVersion = &#39;987654321&#39;;
+
+    const envConfig = Cypress.env();
+    const envKeys = Object.keys(envConfig);
+
+    for (const key of envKeys) {
+    const env = envConfig[key];
+
+    // to perform test only on url1.com you can use:
+    // const key = &#39;&#39;;
+    // const env = envConfig[&#39;URL1.com&#39;];
+
+
+    it(`test site version for: ${key}`, () =&gt; {
+        cy.request(`${env.url}/site/version`)
+          .its(&#39;body&#39;).should(&#39;include&#39;, expectedSiteVersion);
+    })
+  }
+})</code></pre>
+<p>Because the <strong>login process</strong> is a step that is repeated frequently during testing, let&#39;s say we are testing betting platforms and we want to log in and place a bet on every platform, using it&#39;s own minimum stake value. First login:</p>
+<pre><code class="language-JavaScript">it(`login &amp; bet placement test: ${key}`, () =&gt; {
+
+   // first we check login function for all URLs
+   cy.visit(`${env.url}`);
+   cy.get(&#39;[href*=&quot;labelhost/login&quot;]&#39;).should(&quot;exist&quot;);
+   cy.get(&#39;[href*=&quot;labelhost/login&quot;]&#39;).click();
+   cy.get(&#39;lh-login&#39;).should(&quot;exist&quot;);
+   cy.get(&#39;#username&#39;).type(`${env.username}`);
+   cy.get(&#39;#password&#39;).type(`${env.password}`);
+   cy.get(&#39;.login&#39;).click();
+
+   // check if login window is closed after successful login
+   cy.get(&#39;lh-login-dialog&#39;).should(&quot;not.exist&quot;);</code></pre>
+<p>After logging in, in case there are some <strong>additional steps</strong> for specific URL required, like for example accepting <strong>Payment History</strong>, we can use <em>flags</em> that we set up in <em>cypress.json</em> file:</p>
+<pre><code class="language-JavaScript">if (env.requiresPaymentHistory) {
+    cy.get(&#39;#monthly-payment-hist&#39;).find(&#39;.btn&#39;).should(&quot;exist&quot;);
+    cy.get(&#39;#monthly-payment-hist&#39;).find(&#39;.btn&#39;).click();
+}</code></pre>
+<p>Now, after we checked that site version is correct and we are logged in, let&#39;s place a bet on every platform, using it&#39;s own minimum stake value. One of the way of doing that, is to use <strong>clientConfig</strong>:</p>
+<pre><code class="language-js">cy.window()
+  .its(&#39;clientConfig&#39;)
+  .then((cfg) =&gt; {
+      const minStake = cfg.msSportsUser.configSettings.minimumStake;
+      console.log(minStake);
+      cy.get(&#39;.grid-option&#39;).should(&quot;exist&quot;);
+      cy.get(&#39;.grid-option&#39;).eq(0).click();
+      cy.get(&#39;.stake-input-value&#39;).should(&quot;exist&quot;);
+      cy.get(&#39;.stake-input-value&#39;).type(minStake);
+      cy.get(&#39;#betplacement-btn&#39;).click();
+      cy.get(&#39;#betplacement-msg&#39;).contains(&#39;Bet placed&#39;);
+     })
+   })
+  }
+})</code></pre>
+<p>Hope this article was helpful. The whole script can be found on my github profile:</p>
+<p><a href="https://github.com/JJaworski93/cypressSameTestManyURLs">GitHub-Repository</a></p>
+<p>Thanks for reading!</p>
+
+        </div><!-- .post-content -->
+      </article><!-- .post -->
+
+    </main><!-- .site-main -->
+
+    <footer id="colophon" class="site-footer inner">
+  
+  <div class="site-footer-inside">
+    
+    <span class="copyright">&copy; Jakub. All rights reserved. </span>
+    
+    
+  </div><!-- .site-footer-inside -->
+  
+  <a id="to-top" class="to-top" href="#page">To top <span class="icon-arrow-up" aria-hidden="true"></span></a>
+</footer><!-- .site-footer -->
+
+  </div><!-- .site-content -->
+
+
+
+</div><!-- .site -->
+
+        <!-- Scripts -->
+<script src="/assets/js/plugins.js"></script>
+<script src="/assets/js/main.js"></script>
+
+    </body> 
+</html>
