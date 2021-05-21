@@ -2,7 +2,7 @@
 title: Https but still not secure?
 excerpt: >-
   Does your URL start with HTTPS but still is marked as not secure? - Possible solution.
-date: 2021-03-03
+date: 2021-06-03
 thumb_img_path: images/notsecuree.png
 content_img_path: images/mallorca.jpg
 layout: post

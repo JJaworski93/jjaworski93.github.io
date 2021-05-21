@@ -2,7 +2,7 @@
 title: Running Cypress Test Script on multiple URLs
 excerpt: >-
   Is it possible to test multiple URLs at once with Cypress? Let's find out!
-date: 2021-02-03
+date: 2021-05-06
 thumb_img_path: images/time.png
 content_img_path: images/mallorca.jpg
 layout: post

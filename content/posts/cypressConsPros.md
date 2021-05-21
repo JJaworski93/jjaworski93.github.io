@@ -2,7 +2,7 @@
 title: Cypress - software testing tool - advantages and disadvantages
 excerpt: >-
   There is no need to explain to anyone how important software testing is. Let's check the pros and cons of using Cypress.
-date: 2021-01-25
+date: 2021-03-04
 thumb_img_path: images/cypress.png
 content_img_path: images/mallorca.jpg
 layout: post
