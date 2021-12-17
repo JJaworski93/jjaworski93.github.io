@@ -1,6 +1,6 @@
 languageCode = "en-us"
-title = "Massively"
-baseURL = "https://hugo-theme-massively.netlify.com/"
+title = "Software Testing Blog - thebugger.io"
+baseURL = "https://jjaworski93.github.io/"
 theme = "hugo-theme-massively"
 googleanalytics = ""
 disqusShortname = ""
