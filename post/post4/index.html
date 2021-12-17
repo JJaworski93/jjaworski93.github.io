@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Waits in Selenium - quick overview &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">April 1, 2021</span>
+                                
+                                <h1>Waits in Selenium - quick overview</h1>
+                                <p>Implicit and Explicit Wait in Selenium - let&#39;s have a closer look.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/waitsInSelenium.png" alt="" /></div>
+                            
+                            <h5 id="lets-have-a-closer-look-at-implicit-and-explicit-wait-in-selenium">Let&rsquo;s have a closer look at Implicit and Explicit Wait in Selenium.</h5>
+<p>The <strong>wait commands</strong> play essential role when it comes to automated testing. They help to avoid issues that may occur due to variation in time lag. When the webpage loads in the browser, its elements may load at different time intervals. This may lead to the situation in which our automated test will look for an element that is not yet loaded and an exception will be thrown - <em>ElementNotVisibleException</em>. This is when <strong>Wait Commands</strong> come in handy. In this article, we will focus on <strong>Implicit and Explicit Wait in Selenium</strong>.</p>
+<p>The <strong>Implicit Wait</strong> tells the <strong>WebDriver</strong> to wait for a certain amount of time before throwing an <em>ElementNotVisibleException</em>. The initial value is 0 but we can easily modify it. Once we set the specific time, the web driver will wait for the element for that time before throwing an exception.</p>
+<p>Let&rsquo;s create our first <strong>Implicit Wait</strong> with the time frame of <strong>15 seconds</strong>. This way, if the element won&rsquo;t be located on the webpage within that time frame, it will throw an exception. The syntax here will be:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// package that we need to import
+</span><span style="color:#75715e"></span><span style="color:#f92672">import</span> java.util.concurrent.TimeUnit<span style="color:#f92672">;</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#75715e">// JAVA syntax:
+</span><span style="color:#75715e"></span>driver<span style="color:#f92672">.</span><span style="color:#a6e22e">manage</span><span style="color:#f92672">().</span><span style="color:#a6e22e">timeouts</span><span style="color:#f92672">().</span><span style="color:#a6e22e">implicitlyWait</span><span style="color:#f92672">(</span>15<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+</code></pre></div><p>As we can see in the above example, <strong>Implicit Wait</strong> accepts 2 parameters. First parameter is a self-explanatory integer. The second parameter determines the unit of time we want to use (it can be SECONDS, MINUTES, HOURS but also NANOSECONDS, MICROSECONDS, MILISECONDS or even DAYS). Let&rsquo;s have a look at an usage example.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">package</span> implicitWaitExample<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.concurrent.TimeUnit<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.chrome.ChromeDriver<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.BeforeMethod<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.Test<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.AfterMethod<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Waits</span> <span style="color:#f92672">{</span>
+
+<span style="color:#66d9ef">private</span> WebDriver driver<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">private</span> String baseUrl<span style="color:#f92672">;</span>
+
+<span style="color:#a6e22e">@BeforeMethod</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialSetup</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+  driver <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChromeDriver<span style="color:#f92672">();</span>
+  baseUrl <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://www.sometestingurl.com&#34;</span><span style="color:#f92672">;</span>
+  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">manage</span><span style="color:#f92672">().</span><span style="color:#a6e22e">timeouts</span><span style="color:#f92672">().</span><span style="color:#a6e22e">implicitlyWait</span><span style="color:#f92672">(</span>15<span style="color:#f92672">,</span> TimeUnit<span style="color:#f92672">.</span><span style="color:#a6e22e">SECONDS</span><span style="color:#f92672">);</span>
+ <span style="color:#f92672">}</span>
+
+<span style="color:#a6e22e">@Test</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">implicitWaitTest</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+   driver<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>baseUrl<span style="color:#f92672">);</span>
+   WebElement element <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;someId&#34;</span><span style="color:#f92672">));</span>
+   element<span style="color:#f92672">.</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Some testing string&#34;</span><span style="color:#f92672">);</span>
+   element<span style="color:#f92672">.</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span>Keys<span style="color:#f92672">.</span><span style="color:#a6e22e">RETURN</span><span style="color:#f92672">);</span>
+   WebElement element2 <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">className</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;someClass&#34;</span><span style="color:#f92672">));</span>
+   element2<span style="color:#f92672">.</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span>
+ <span style="color:#f92672">}</span>
+
+ <span style="color:#a6e22e">@AfterMethod</span>
+  <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">tearDown</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+   driver<span style="color:#f92672">.</span><span style="color:#a6e22e">quit</span><span style="color:#f92672">();</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span> 
+</code></pre></div><p>The undoubted advantage of this solution is that it&rsquo;s easy to implement and that the <strong>WebDriver</strong> will now wait up to 15 seconds before it will throw an <em>ElementNotVisibleException</em> for <em>element</em> and <em>element2</em> from our example. <strong>Implicit Wait</strong> naturally has also disadvantages. Unfortunately, it includes only the findElement(By by) method. Hence, there are a number of examples when this method will be insufficient.</p>
+<p>The <strong>Explicit Wait</strong> tells the <strong>WebDriver</strong> to wait for certain condition (<em>Expected Condition</em>) to occur before proceeding with execution of the code. Unfortunately, it cannot be applied globally (like Implicit Wait) but only for specific elements. It comes in handy especially with dynamically loaded elements. Such as forms or buttons that are loaded (for example, via Ajax) after the page has loaded. Imagine also adding a comment, if comment is long and includes images - it can take much longer than it would take for a simply, short one. Also, let&rsquo;s say we work with <em>sendKeys</em>, with <strong>Explicit Wait</strong> we can set 10s for sendKeys in one element and 20s for other element - this makes <strong>Explicit Wait</strong> more <em>flexible</em> and <em>dynamic</em> (later you will see an example).</p>
+<p>In order to create an <strong>Explicit Wait</strong>, we have to define an <strong>ExpectedConditions</strong>. The following <em>Expected Conditions</em> can be used:</p>
+<ul>
+<li>titleIs()</li>
+<li>titleContains()</li>
+<li>alertIsPresent()</li>
+<li>visibilityOf()</li>
+<li>visibilityOfElementLocated()</li>
+<li>visibilityOfAllElements()</li>
+<li>elementSelectionStateToBe()</li>
+<li>elementToBeClickable()</li>
+<li>elementToBeSelected()</li>
+<li>invisibilityOfTheElementLocated()</li>
+<li>invisibilityOfElementWithText()</li>
+<li>presenceOfAllElementsLocatedBy()</li>
+<li>presenceOfElementLocated()</li>
+<li>textToBePresentInElement()</li>
+</ul>
+<p>More conditions can be found <a href="https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/ExpectedConditions.html">here</a>. <strong>Explicit Wait</strong> is more complex and also &ldquo;smarter&rdquo; than <strong>Implicit Wait</strong>. To use it in our test script, first we need to import the following packages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">import</span> org.openqa.selenium.support.ui.ExpectedConditions
+<span style="color:#f92672">import</span> org.openqa.selenium.support.ui.WebDriverWait
+</code></pre></div><p>After that we need to initialize a <strong>Wait Object</strong> using <em>WebDriverWait</em> class. Note that the wait time here is measured in seconds. We will stick to our sample <strong>15 seconds</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// JAVA syntax
+</span><span style="color:#75715e"></span>WebDriverWait wait <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebDriverWait<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> 15<span style="color:#f92672">);</span>
+</code></pre></div><p>Let&rsquo;s have a look at some <strong>Explicit Wait</strong> example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">package</span> ExplicitWaitExample<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.concurrent.TimeUnit<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.support.ui.ExpectedConditions<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.support.ui.WebDriverWait<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.By<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.Keys<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.WebDriver<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.WebElement<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.openqa.selenium.chrome.ChromeDriver<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.BeforeMethod<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.Test<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> org.testng.annotations.AfterMethod<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Waits</span> <span style="color:#f92672">{</span>
+
+ <span style="color:#75715e">// creating reference variable for WebDriver
+</span><span style="color:#75715e"></span> WebDriver driver<span style="color:#f92672">;</span>
+ <span style="color:#75715e">// creating string for confirmation message needed for our test
+</span><span style="color:#75715e"></span> String confirmationMessage <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;You logged in successfully!&#34;</span><span style="color:#f92672">;</span>
+ String ourTestingURL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://sometestingurl.com&#34;</span><span style="color:#f92672">;</span>
+
+<span style="color:#a6e22e">@BeforeMethod</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">initialSetup</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// initializing driver variable using ChromeDriver
+</span><span style="color:#75715e"></span>  driver <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ChromeDriver<span style="color:#f92672">();</span>
+  <span style="color:#75715e">// note: both Implicit and Explicit Waits can work together, but because Implicit Wait works globally it might affect waiting time for Explicit Wait elements - that is why it is not recommended to use both simultaneously.
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">//driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+</span><span style="color:#75715e"></span> <span style="color:#f92672">}</span>
+
+<span style="color:#a6e22e">@Test</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">explicitWaitExample</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// Explicit Wait - will wait up to 15sec for username, password and confirmation message
+</span><span style="color:#75715e"></span>  WebDriverWait wait <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebDriverWait<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> 15<span style="color:#f92672">);</span>
+  <span style="color:#75715e">// launching our testing URL
+</span><span style="color:#75715e"></span>  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">navigate</span><span style="color:#f92672">().</span><span style="color:#a6e22e">to</span><span style="color:#f92672">(</span>ourTestingURL<span style="color:#f92672">);</span>
+
+  wait<span style="color:#f92672">.</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">presenceOfElementLocated</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">cssSelector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;#username&#34;</span><span style="color:#f92672">)));</span>  
+
+  <span style="color:#75715e">// saving the GUI element reference into a &#34;element&#34; variable of WebElement type
+</span><span style="color:#75715e"></span>  WebElement element <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;username&#34;</span><span style="color:#f92672">));</span>
+  <span style="color:#75715e">// entering username
+</span><span style="color:#75715e"></span>  element<span style="color:#f92672">.</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Username&#34;</span><span style="color:#f92672">);</span>
+
+  wait<span style="color:#f92672">.</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">presenceOfElementLocated</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">cssSelector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;#password&#34;</span><span style="color:#f92672">)));</span>
+
+  <span style="color:#75715e">// entering account password
+</span><span style="color:#75715e"></span>  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AccPW&#34;</span><span style="color:#f92672">);</span>
+  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;signIn&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span>
+
+  wait<span style="color:#f92672">.</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">textToBe</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">cssSelector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;#confirmationMSG&#34;</span><span style="color:#f92672">),</span> confirmationMessage<span style="color:#f92672">));</span> 
+
+  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;confirmationMsgBtn&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span>
+ <span style="color:#f92672">}</span>
+
+<span style="color:#a6e22e">@AfterMethod</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">teardown</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#75715e">// closes all the browser windows opened by web driver
+</span><span style="color:#75715e"></span>  driver<span style="color:#f92672">.</span><span style="color:#a6e22e">quit</span><span style="color:#f92672">();</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>In the example above, the <strong>WebDriver</strong> waits twice for the elements with id <em>username</em> and <em>password</em> to be displayed before typing, and finally it waits for the <em>#confirmationMSG</em> element to have the specified text. It will wait up to 15s before throwing an exception. Note that unlike the <strong>Implicit Wait</strong> which throws a <em>NoSuchElementException</em>, <strong>Explicit Wait</strong> throws a <em>TimeoutException</em>. For the better test clarity, we can modify this message, for example as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+
+<span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">explicitWaitExample</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+ WebDriverWait wait <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> WebDriverWait<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> 15<span style="color:#f92672">);</span>
+
+    <span style="color:#f92672">.</span>
+    <span style="color:#f92672">.</span>
+    <span style="color:#f92672">.</span>
+
+ <span style="color:#66d9ef">try</span> <span style="color:#f92672">{</span>
+    wait<span style="color:#f92672">.</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">textToBe</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">cssSelector</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;#confirmationMSG&#34;</span><span style="color:#f92672">),</span> confirmationMessage<span style="color:#f92672">));</span>      
+ <span style="color:#f92672">}</span> <span style="color:#66d9ef">catch</span> <span style="color:#f92672">(</span>TimeoutException e<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+     <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> AssertionFailedError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;The login confirmation message displayed was different than expected. &#34;</span> <span style="color:#f92672">+</span> e<span style="color:#f92672">.</span><span style="color:#a6e22e">getMessage</span><span style="color:#f92672">());</span>
+ <span style="color:#f92672">}</span>
+
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+</code></pre></div><p>Now, let&rsquo;s have a look at another example of <strong>Explicit Wait</strong> in which we will set a different <em>waiting time</em> for two different <em>sendKeys</em> commands:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+
+<span style="color:#a6e22e">@Test</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">explicitWaitExample</span><span style="color:#f92672">()</span> <span style="color:#66d9ef">throws</span> InterruptedException <span style="color:#f92672">{</span>
+
+    <span style="color:#f92672">.</span>
+    <span style="color:#f92672">.</span>
+    <span style="color:#f92672">.</span>
+
+ driver<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;https://sometestingurl.com&#34;</span><span style="color:#f92672">);</span>
+ WebElement login <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;login&#34;</span><span style="color:#f92672">));</span>
+ WebElement password <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">));</span>
+
+ <span style="color:#75715e">// setting different waiting time for sendKeys commands:
+</span><span style="color:#75715e"></span> sendKeys<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> login<span style="color:#f92672">,</span> 10<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;mylogin&#34;</span><span style="color:#f92672">);</span>
+ sendKeys<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> email<span style="color:#f92672">,</span> 15<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;mypassword&#34;</span><span style="color:#f92672">);</span>
+
+ WebElement logIn <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;logInBtn&#34;</span><span style="color:#f92672">));</span>
+ <span style="color:#75715e">// setting waiting time for clickOn command
+</span><span style="color:#75715e"></span> clickOn<span style="color:#f92672">(</span>driver<span style="color:#f92672">,</span> logIn<span style="color:#f92672">,</span> 11<span style="color:#f92672">);</span>
+
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span>WebDriver driver1<span style="color:#f92672">,</span> WebElement element<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> timeout<span style="color:#f92672">,</span> String value<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">new</span> WebDriverWait<span style="color:#f92672">(</span>driver1<span style="color:#f92672">,</span> timeout<span style="color:#f92672">).</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">visibilityOf</span><span style="color:#f92672">(</span>element<span style="color:#f92672">));</span>
+    element<span style="color:#f92672">.</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span>value<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">clickOn</span><span style="color:#f92672">(</span>WebDriver driver1<span style="color:#f92672">,</span> WebElement element<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> timeout<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">new</span> WebDriverWait<span style="color:#f92672">(</span>driver1<span style="color:#f92672">,</span> timeout<span style="color:#f92672">).</span><span style="color:#a6e22e">until</span><span style="color:#f92672">(</span>ExpectedConditions<span style="color:#f92672">.</span><span style="color:#a6e22e">elementToBeClickable</span><span style="color:#f92672">(</span>element<span style="color:#f92672">));</span>
+    element<span style="color:#f92672">.</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+<span style="color:#f92672">.</span>
+</code></pre></div><p>In this example our <em>driver</em> will wait up to <strong>10s</strong> until <em>login element</em> and up to <strong>15s</strong> until <em>password element</em> will be visible, before typing the values. We also instructed it to wait up to <strong>11s</strong> for <em>logInBtn element</em> to be clickable, before actually trying to click it.</p>
+<p>Selenium Waits commands are, undeniably, a crucial concept when it comes to creating effective and efficient automated tests. They are the foundation for developing reliable test scripts. Implicit and Explicit are different types of Waits in Selenium. The usage of these Waits is completely dependent on the situation, elements, and the preferences of the developer. However, it is recommended to choose the Explicit Wait over the Implicit Wait because of better control and less risk of lengthening the test execution. Nevertheless, there are of course situations in which Implicit Wait comes in handy.</p>
+<p>Hope this article was helpful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

@@ -6,7 +6,16 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Waits in Selenium - quick overview</title>
+      <link>https://jjaworski93.github.io/post/post4/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post4/</guid>
+      <description>Let&amp;rsquo;s have a closer look at Implicit and Explicit Wait in Selenium. The wait commands play essential role when it comes to automated testing. They help to avoid issues that may occur due to variation in time lag. When the webpage loads in the browser, its elements may load at different time intervals. This may lead to the situation in which our automated test will look for an element that is not yet loaded and an exception will be thrown - ElementNotVisibleException.</description>
+    </item>
+    
     <item>
       <title>The differences between TDD and BDD</title>
       <link>https://jjaworski93.github.io/post/post3/</link>
