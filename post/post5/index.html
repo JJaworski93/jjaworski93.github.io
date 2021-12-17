@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>JavaScriptExecutor in Selenium - introduction &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">May 6, 2021</span>
+                                
+                                <h1>JavaScriptExecutor in Selenium - introduction</h1>
+                                <p>You may come across situations where Selenium WebDriver alone will not be able to perform certain operations or interact with some web elements or maybe you just like to work with JS. If this is a case, JavascriptExecutor comes in handy. Let’s have a look on some examples.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/seleniumJS.jpg" alt="" /></div>
+                            
+                            <h5 id="it-turns-that-crayfish-might-be-much-smarter-than-we-have-ever-imagined-so-clever-they-can-grow-new-brain-cells-from-their-own-blood-however-this-article-will-be-about-javascriptexecutor-in-selenium">It turns that Crayfish might be much smarter than we have ever imagined. So clever, they can grow new brain cells from their own blood. However, this article will be about JavascriptExecutor in Selenium.</h5>
+<p>You may come across situations where <strong>Selenium WebDriver</strong> alone will not be able to perform certain operations or interact with some web elements, like unexpected pop-ups. In that case, <strong>JavascriptExecutor</strong> comes in handy. Let’s have a closer look on that topic.</p>
+<p>Briefly speaking, <strong>JavascriptExecutor</strong> enables the <strong>WebDriver</strong> to interact with the elements with a use of JavaScript programming language. It is based on two methods:</p>
+<ul>
+<li><strong>executeAsyncScript</strong> – this method executes the <em>asynchronous JavaScript</em> on the current selected window or frame. What means that our test script will be executed while the rest of the page continues the parsing. This enhances the responsiveness and performance of the app. This type of <em>JS Executor</em> comes in handy for example, in situations when some action takes time (e.g. some <em>Web Service call</em>).</li>
+<li><strong>executeScript</strong> - this method executes the <em>JavaScript</em> on the current selected window or frame. Script in this method executes in the body of an anonymous function. What is different and important here, is that until the script execute, it won&rsquo;t proceed with the next step.</li>
+</ul>
+<p>In order to use <strong>JavascriptExecutor</strong> in the test script, following is needed (Selenium Java Syntax):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// importing the package
+</span><span style="color:#75715e"></span><span style="color:#f92672">import</span> org.openqa.selenium.JavascriptExecutor<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">// creating a reference 
+</span><span style="color:#75715e"></span>JavascriptExecutor js <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>JavascriptExecutor<span style="color:#f92672">)</span> driver<span style="color:#f92672">;</span>
+
+</code></pre></div><p>Let’s have a look on some <strong>executeScript</strong> usage examples:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// clicking the button
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">“</span>document<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementByID</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">‘</span>id<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#f92672">).</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span><span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// sending the text
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">“</span>document<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementByID</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">‘</span>id<span style="color:#960050;background-color:#1e0010">‘</span><span style="color:#f92672">).</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">‘</span>some text<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#f92672">;</span><span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// scrolling to the bottom of the page
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;window.scrollTo(0, document.body.scrollHeight);&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// scrolling up to some extend
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;scroll(0, -300);&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// scrolling down up to some extend
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;scroll(0, 300);&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// checking and unchecking the checkbox
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;document.getElementById(&#39;enter element id&#39;).checked=true;&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// reloading the page
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;location.reload();&#34;</span><span style="color:#f92672">);</span>
+
+<span style="color:#75715e">// getting the innertext
+</span><span style="color:#75715e"></span>String innerTxt <span style="color:#f92672">=</span> js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;return document.documentElement.innerText;&#34;</span><span style="color:#f92672">).</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">();</span>
+
+<span style="color:#75715e">// navigating to a different page
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;window.location = &#39;https://some-other-page.com&#39;;&#34;</span><span style="color:#f92672">);</span>
+
+</code></pre></div><p>As I mentioned before, <em>JS Executor</em> is capable also to execute <em>asynchronous piece of JavaScript</em> for our use. Unlike executing <em>synchronous JavaScript</em>, scripts executed with <em>executeAsyncScript</em> method must explicitly signal they are finished by invoking the provided callback. This callback is always injected into the executed function as the last argument. Essentially, <em>executeScript</em> blocks further actions being performed by the <em>selenium driver</em>, while <em>executeAsyncScript</em> does not block and calls on a callback when it&rsquo;s done.</p>
+<p>To summarize:</p>
+<ul>
+<li>executeScript returns the result directly, blocking further actions in the meantime</li>
+<li>executeAsyncScript returns the result through a callback, not blocking further actions in the meantime</li>
+</ul>
+<p>Let&rsquo;s have a look on some <em>Async</em> examples. With <strong>executeAsyncScript</strong> we can perform a sleep in the browser under test. In our case it will be <em>2s</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// setting the start time		
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> startTime <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">();</span>			
+         
+<span style="color:#75715e">// calling executeAsyncScript to wait for 2s
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeAsyncScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;window.setTimeout(arguments[arguments.length - 1], 2000);&#34;</span><span style="color:#f92672">);</span>
+
+</code></pre></div><p>We can do it also this way:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#66d9ef">long</span> startTime <span style="color:#f92672">=</span> System<span style="color:#f92672">.</span><span style="color:#a6e22e">currentTimeMillis</span><span style="color:#f92672">();</span>
+   <span style="color:#f92672">((</span>JavascriptExecutor<span style="color:#f92672">)</span> driver<span style="color:#f92672">).</span><span style="color:#a6e22e">executeAsyncScript</span><span style="color:#f92672">(</span>
+       <span style="color:#e6db74">&#34;window.setTimeout(arguments[arguments.length - 1], 1000);&#34;</span><span style="color:#f92672">);</span>
+
+</code></pre></div><p>We can synchronize our test with an <em>AJAX</em> application:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA">WebElement composeButton <span style="color:#f92672">=</span> driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;compose-btn&#34;</span><span style="color:#f92672">));</span>
+composeButton<span style="color:#f92672">.</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span>
+
+<span style="color:#f92672">((</span>JavascriptExecutor<span style="color:#f92672">)</span> driver<span style="color:#f92672">).</span><span style="color:#a6e22e">executeAsyncScript</span><span style="color:#f92672">(</span>
+    <span style="color:#e6db74">&#34;var callback = arguments[arguments.length - 1];&#34;</span> <span style="color:#f92672">+</span>
+    <span style="color:#e6db74">&#34;mailClient.getComposeWindowWidget().onload(callback);&#34;</span><span style="color:#f92672">);</span>
+driver<span style="color:#f92672">.</span><span style="color:#a6e22e">switchTo</span><span style="color:#f92672">().</span><span style="color:#a6e22e">frame</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;composeWidget&#34;</span><span style="color:#f92672">);</span>
+driver<span style="color:#f92672">.</span><span style="color:#a6e22e">findElement</span><span style="color:#f92672">(</span>By<span style="color:#f92672">.</span><span style="color:#a6e22e">id</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;id&#34;</span><span style="color:#f92672">)).</span><span style="color:#a6e22e">sendKeys</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;example@example.com&#34;</span><span style="color:#f92672">);</span>
+
+</code></pre></div><p>In Vue.js to make components completely rendered we wait for <a href="https://vuejs.org/v2/api/#Vue-nextTick">nextTick</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#f92672">((</span>JavascriptExecutor<span style="color:#f92672">)</span> driver<span style="color:#f92672">).</span><span style="color:#a6e22e">executeAsyncScript</span><span style="color:#f92672">(</span>function<span style="color:#f92672">(</span>done<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  <span style="color:#75715e">//awaiting for the next tick
+</span><span style="color:#75715e"></span>  Vue<span style="color:#f92672">.</span><span style="color:#a6e22e">nextTick</span><span style="color:#f92672">(</span>done<span style="color:#f92672">);</span>
+<span style="color:#f92672">});</span>
+</code></pre></div><p>Remember also that, the script arguments must be a <strong>number</strong>, <strong>String</strong>, <strong>boolean</strong>, <strong>WebElement</strong>, or a <strong>List</strong> of any combination of those. Otherwise, an exception will be thrown. More about <strong>JavaScriptExecutor</strong> can be found in official <a href="https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/JavascriptExecutor.html#executeAsyncScript(java.lang.String,java.lang.Object...)">Selenium Documentation</a>.</p>
+<p>Hope this article was helpful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
