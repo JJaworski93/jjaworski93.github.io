@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>The differences between TDD and BDD &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">March 4, 2021</span>
+                                
+                                <h1>The differences between TDD and BDD</h1>
+                                <p>Let&#39;s look at the differences between two testing-related concepts - Test Driven Development and Behavior Driven Development.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/tddandbdd.png" alt="" /></div>
+                            
+                            <h5 id="in-this-blog-post-we-are-going-to-discover-the-main-differences-between-two-testing-related-concepts---test-driven-development-and-behavior-driven-development">In this blog post we are going to discover the main differences between two testing-related concepts - Test Driven Development and Behavior Driven Development.</h5>
+<p><strong>TDD</strong> and <strong>BDD</strong> are two widely used software development techniques in which automated testing plays a central role. Today we are going to explore the differences.</p>
+<p>Let&rsquo;s start with <strong>Test Driven Development</strong>. Typically, in this technique, we write tests for a certain piece of functionality before writing the production code. Then, we run those tests, we wait for them to fail and then we write a code to make the tests pass. This will give us the confidence that our code works. In general, we can say that <strong>TDD</strong> is all about <em>Unit Testing</em>. This approach is mainly focused on achieving high <em>test coverage</em> and answering following questions - <em>is the code working? Was the code/feature implemented?</em> Steps here will be:</p>
+<ul>
+<li>write a test case based on requirements</li>
+<li>write an unit test for the piece of the codebase (functionality) you are planning to create,</li>
+<li>execute all existing tests (if any exist) and make sure that only the newly created test is failing. It must fail, as you try to test something that doesn&rsquo;t yet exist,</li>
+<li>write production code to make all the tests pass,</li>
+<li>refactor your code in order to improve it in general (e.g. it&rsquo;s maintainability, extensibility, readability, efficiency etc.) and to avoid things like duplication,</li>
+<li>run all the tests again, to be sure that refactoring didn&rsquo;t break anything.</li>
+</ul>
+<p>When it comes to <strong>Behavior Driven Development</strong>, usually, it involves developers, test/qa engineers, product managers, business analysts and potentially also other stakeholders. Their task is to discuss the concrete examples of so-called <em>acceptance criteria</em> in a user story. In short, it can be said that the <em>acceptance criteria</em> is a set of conditions, as well as an instruction on how software should function, look and behave to meet the user&rsquo;s needs. To simplify, we can say that this technique is focused on writing acceptance criteria by giving examples of <em>how the software should behave in a certain scenarios</em>. This makes it easier for all stakeholders to collaborate. Most companies use the Given-When-Then approach for this. Let&rsquo;s see an example:</p>
+<ul>
+<li><em>Given</em> - user has provided valid login credentials,</li>
+<li><em>When</em> - user has clicked the login button,</li>
+<li><em>Then</em> - user gets a message about successful login.</li>
+</ul>
+<p><strong>BDD</strong> is a great automated testing practice, as it focuses on <em>customer experience</em> and not only on code/feature implementation. Steps here will be:</p>
+<ul>
+<li>identify and describe new feature and it&rsquo;s behavior under certain scenarios,</li>
+<li>write understandable for everybody steps for each scenario,</li>
+<li>write tests based on those scenarios,</li>
+<li>implement the respective code,</li>
+<li>run tests and check if they are successful. If not, fix the errors. If yes, move further,</li>
+<li>refactor your code,</li>
+<li>run all the tests again.</li>
+</ul>
+<p>To summarize, we can say that <strong>TDD</strong> is focused more on unit testing, code/feature implementation and high test coverage, while <strong>BDD</strong> is focused more on user experience and software behavior.</p>
+<p>Hope this article was helpful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

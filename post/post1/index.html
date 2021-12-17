@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>How to add a project to GitHub using command line &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">January 7, 2021</span>
+                                
+                                <h1>How to add a project to GitHub using command line</h1>
+                                <p>Adding your project to GitHub can let you build your portfolio, share your work and collaborate with others.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/github.jpg" alt="" /></div>
+                            
+                            <h5 id="creating-and-adding-your-project-to-github-can-let-you-build-your-portfolio-share-your-work-and-collaborate-with-others-lets-start">Creating and adding your project to GitHub can let you build your portfolio, share your work and collaborate with others. Let&rsquo;s start!</h5>
+<p>In case you don&rsquo;t have Git installed yet, check <a href="https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/set-up-git">this article</a> on how to set it up.</p>
+<p>If you already have Git installed, create a <a href="https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/creating-a-new-repository">new repository</a> on GitHub, open Terminal and navigate into the directory where your source code (project) is located and <strong>initialize the local directory as a Git repository</strong> using:</p>
+<p><em>git init</em></p>
+<p><strong>Add all project files in your new local repository and stage them</strong> before the first commit using:</p>
+<p><em>git add .</em></p>
+<p><strong>Commit the files</strong> that you have staged in your local repository:</p>
+<p><em>git commit -m &ldquo;<em>your commit comment</em>&quot;</em></p>
+<p>Now you should add the URL for the remote repository where your local repository will be pushed. At the top of your new GitHub repository, you will find the remote repository HTTPS URL. It should look similar to: <em>ht<!-- raw HTML omitted -->tps://<!-- raw HTML omitted -->github.com/yourusername/reponame.git</em>. Copy this URL, as you will need it in the next step. Next step is to <strong>add a remote (github) location</strong> with this command (remember to replace below URL with the URL that you copied in previous step):</p>
+<p><em>git remote add origin ht<!-- raw HTML omitted -->tps://<!-- raw HTML omitted -->github.com/yourusername/reponame.git</em></p>
+<p>Now you can <strong>verify the new remote URL</strong>:</p>
+<p><em>git remote -v</em></p>
+<p>At this stage you are ready to <strong>push your project to your repository</strong> hosted with GitHub:</p>
+<p><em>git push -u origin master</em></p>
+<p>Short note. GitHub is already working on replacing the term &ldquo;master&rdquo; on its service with a more neutral term &ldquo;main&rdquo;. The reason is to avoid any unnecessary references to slavery (master and slave relation). For now you can choose if you want to have &ldquo;master&rdquo; or &ldquo;main&rdquo; as your default branch. In case your default (main) branch is &ldquo;main&rdquo;, you should use:</p>
+<p><em>git push -u origin main</em></p>
+<p>instead of: <em>git push -u origin master</em>.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

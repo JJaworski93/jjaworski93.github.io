@@ -6,23 +6,35 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Dec 2021 22:46:35 +0100</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mypost2</title>
-      <link>https://jjaworski93.github.io/post/mypost2/</link>
-      <pubDate>Fri, 17 Dec 2021 22:46:35 +0100</pubDate>
+      <title>The differences between TDD and BDD</title>
+      <link>https://jjaworski93.github.io/post/post3/</link>
+      <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jjaworski93.github.io/post/mypost2/</guid>
-      <description>uwhdusadhuas</description>
+      <guid>https://jjaworski93.github.io/post/post3/</guid>
+      <description>In this blog post we are going to discover the main differences between two testing-related concepts - Test Driven Development and Behavior Driven Development. TDD and BDD are two widely used software development techniques in which automated testing plays a central role. Today we are going to explore the differences.
+Let&amp;rsquo;s start with Test Driven Development. Typically, in this technique, we write tests for a certain piece of functionality before writing the production code.</description>
     </item>
     
     <item>
-      <title>Mypost</title>
-      <link>https://jjaworski93.github.io/post/mypost/</link>
-      <pubDate>Fri, 17 Dec 2021 22:09:26 +0100</pubDate>
+      <title>Selenium - advantages and disadvantages</title>
+      <link>https://jjaworski93.github.io/post/post2/</link>
+      <pubDate>Thu, 04 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jjaworski93.github.io/post/mypost/</guid>
-      <description>this is some post</description>
+      <guid>https://jjaworski93.github.io/post/post2/</guid>
+      <description>Creating and adding your project to GitHub can let you build your portfolio, share your work and collaborate with others. Let&amp;rsquo;s start! In case you don&amp;rsquo;t have Git installed yet, check this article on how to set it up.
+If you already have Git installed, create a new repository on GitHub, open Terminal and navigate into the directory where your source code (project) is located and initialize the local directory as a Git repository using:</description>
+    </item>
+    
+    <item>
+      <title>How to add a project to GitHub using command line</title>
+      <link>https://jjaworski93.github.io/post/post1/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post1/</guid>
+      <description>Creating and adding your project to GitHub can let you build your portfolio, share your work and collaborate with others. Let&amp;rsquo;s start! In case you don&amp;rsquo;t have Git installed yet, check this article on how to set it up.
+If you already have Git installed, create a new repository on GitHub, open Terminal and navigate into the directory where your source code (project) is located and initialize the local directory as a Git repository using:</description>
     </item>
     
   </channel>
