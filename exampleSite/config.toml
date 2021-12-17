@@ -1,6 +1,6 @@
 languageCode = "en-us"
-title = "Massively"
-baseURL = "http://localhost:1313/"
+title = "Software Testing Blog - thebugger.io"
+baseURL = "https://jjaworski93.github.io/"
 theme = "hugo-theme-massively"
 googleanalytics = ""
 disqusShortname = ""
