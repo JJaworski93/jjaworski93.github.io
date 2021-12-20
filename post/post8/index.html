@@ -1,0 +1,159 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>API testing with Cypress - quick overview &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">August 5, 2021</span>
+                                
+                                <h1>API testing with Cypress - quick overview</h1>
+                                <p>This article will be a brief overview of API testing in Cypress.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/cypressapi.png" alt="" /></div>
+                            
+                            <h5 id="this-article-will-be-an-introduction-to-cypress-api-testing">This article will be an introduction to Cypress API testing.</h5>
+<p><strong>Cypress</strong> supports operations like <em>GET, POST, PUT, DELETE, PATCH, HEAD</em> and many more. This quick overview will be focused on GET, POST and DELETE.</p>
+<p>Without further ado, let&rsquo;s create our first API test with Cypress:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;First GET Request Test&#39;</span>, () =&gt; {
+ 
+    <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#34;Checking Status Code for our URL&#34;</span>, () =&gt; {   
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#34;https://oururl.com/somesubpage&#34;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#39;res&#39;</span>)
+        .<span style="color:#a6e22e">its</span>(<span style="color:#e6db74">&#39;status&#39;</span>)
+        .<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;equal&#39;</span>, <span style="color:#ae81ff">200</span>);
+
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@res&#39;</span>)
+           .<span style="color:#a6e22e">its</span>(<span style="color:#e6db74">&#39;headers&#39;</span>)
+           .<span style="color:#a6e22e">its</span>(<span style="color:#e6db74">&#39;content-type&#39;</span>)
+           .<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;include&#39;</span>, <span style="color:#e6db74">&#39;application/json; charset=utf-8&#39;</span>);
+ 
+    });
+ 
+});
+</code></pre></div><p>Here, using an inbuilt <em>assertion library (Chai)</em>, we made a basic check. We checked if response for our URL is 200 (as it should be). We validated also Content-Type values.</p>
+<p>Let&rsquo;s create a little more complex <strong>API test</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">newPostId</span>;
+
+<span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;API Test - adding and deleting posts&#39;</span>, () =&gt; {
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Adding a new post&#39;</span>, () =&gt; {   
+
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;http://oururl.com/posts/&#39;</span>,{<span style="color:#a6e22e">title</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Post1&#39;</span>, <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#a6e22e">author</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Postwriter&#39;</span>, <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;postwriter@post.com&#34;</span> });
+
+    .<span style="color:#a6e22e">its</span>(<span style="color:#e6db74">&#39;body&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">body</span>) =&gt; {
+      <span style="color:#a6e22e">newPostId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">id</span>;
+    });
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Verifing the new post was added&#39;</span>, () =&gt; {
+
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;http://oururl.com/posts/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">newPostId</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#ae81ff">200</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">have</span>.<span style="color:#a6e22e">property</span>(<span style="color:#e6db74">&#39;title&#39;</span>, <span style="color:#e6db74">&#39;Post1&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">have</span>.<span style="color:#a6e22e">property</span>(<span style="color:#e6db74">&#39;author&#39;</span>, <span style="color:#e6db74">&#39;Postwriter&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">have</span>.<span style="color:#a6e22e">property</span>(<span style="color:#e6db74">&#39;email&#39;</span>, <span style="color:#e6db74">&#39;postwriter@post.com&#39;</span>); 
+    });
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Deleting the newly added post&#39;</span>, () =&gt; {
+
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;DELETE&#39;</span>, <span style="color:#e6db74">&#39;http://oururl.com/posts/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">newId</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#ae81ff">200</span>);
+    });
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Verifying the post was deleted&#39;</span>, () =&gt; {
+
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>({<span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;http://oururl.com/posts/&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">newId</span>, <span style="color:#a6e22e">failOnStatusCode</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>}).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">eq</span>(<span style="color:#ae81ff">404</span>);
+    });
+  });
+});
+</code></pre></div><p>With the above self-explanatory line of codes, we succeed to create our first <strong>API</strong> tests in <strong>Cypress</strong>.</p>
+<p>Hope this article was helpful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

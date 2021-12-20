@@ -6,7 +6,58 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Running Cypress Test Script on multiple URLs</title>
+      <link>https://jjaworski93.github.io/post/post7/</link>
+      <pubDate>Thu, 04 Nov 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post7/</guid>
+      <description>Today we will create Cypress Testing Script that will be performed on multiple URLs. Let&amp;rsquo;s start! First we need to create Environment Variables in cypress.json file. Those variables will store our URLs but also usernames and passwords, needed in login process:
+{ &amp;#34;ignoreTestFiles&amp;#34;: &amp;#34;*/examples/&amp;#34;, &amp;#34;viewportHeight&amp;#34;: 1080, &amp;#34;viewportWidth&amp;#34;: 1920, &amp;#34;pageLoadTimeout&amp;#34;: 20000, &amp;#34;defaultCommandTimeout&amp;#34;: 8000, &amp;#34;retries&amp;#34;: 3, &amp;#34;env&amp;#34;: { &amp;#34;URL1.be&amp;#34;: { &amp;#34;url&amp;#34;: &amp;#34;https://url1.be&amp;#34;, &amp;#34;username&amp;#34;: &amp;#34;uname&amp;#34;, &amp;#34;password&amp;#34;: &amp;#34;pword&amp;#34; }, &amp;#34;URL1.ch&amp;#34;: { &amp;#34;url&amp;#34;: &amp;#34;https://url1.ch&amp;#34;, &amp;#34;username&amp;#34;: &amp;#34;uname&amp;#34;, &amp;#34;password&amp;#34;: &amp;#34;pword&amp;#34; }, &amp;#34;URL1.</description>
+    </item>
+    
+    <item>
+      <title>Https but still not secure?</title>
+      <link>https://jjaworski93.github.io/post/post8/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post8/</guid>
+      <description>Does your URL start with HTTPS but still is marked as not secure? Let&amp;rsquo;s take a closer look at it. HTTPS stands for “Hypertext Transfer Protocol Secure”. It allows for the secure flow of information between a server and client. It may happen that although your URL starts with HTTPS and there is nothing wrong with your SSL certificate, web browsers will indicate that connection to your site is not secure:</description>
+    </item>
+    
+    <item>
+      <title>Page Objects in Cypress - introduction</title>
+      <link>https://jjaworski93.github.io/post/post9/</link>
+      <pubDate>Thu, 02 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post9/</guid>
+      <description>In this short article we are going to learn how to use Page Objects in Cypress. Page Objects make end-to-end tests readable and easy to maintain. Among others there are three main benefits of using them:
+ Keeping all page element selectors in one place Possibility to use Page Objects in multiple tests Standardizing how tests interact with the page  To simplyfy, we can say, that Page Object encapsulates the mechanics in GUI and allows us to find and manipulate page elements without digging around in the HTML.</description>
+    </item>
+    
+    <item>
+      <title>API testing with Cypress - quick overview</title>
+      <link>https://jjaworski93.github.io/post/post8/</link>
+      <pubDate>Thu, 05 Aug 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post8/</guid>
+      <description>This article will be an introduction to Cypress API testing. Cypress supports operations like GET, POST, PUT, DELETE, PATCH, HEAD and many more. This quick overview will be focused on GET, POST and DELETE.
+Without further ado, let&amp;rsquo;s create our first API test with Cypress:
+describe(&amp;#39;First GET Request Test&amp;#39;, () =&amp;gt; { it(&amp;#34;Checking Status Code for our URL&amp;#34;, () =&amp;gt; { cy.request(&amp;#34;https://oururl.com/somesubpage&amp;#34;).as(&amp;#39;res&amp;#39;) .its(&amp;#39;status&amp;#39;) .should(&amp;#39;equal&amp;#39;, 200); cy.get(&amp;#39;@res&amp;#39;) .its(&amp;#39;headers&amp;#39;) .its(&amp;#39;content-type&amp;#39;) .should(&amp;#39;include&amp;#39;, &amp;#39;application/json; charset=utf-8&amp;#39;); }); }); Here, using an inbuilt assertion library (Chai), we made a basic check.</description>
+    </item>
+    
+    <item>
+      <title>Is multi-tab testing supported by Cypress?</title>
+      <link>https://jjaworski93.github.io/post/post7/</link>
+      <pubDate>Thu, 01 Jul 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post7/</guid>
+      <description>In the previous post I mentioned that Cypress does not support multi-tab testing. But is there anything we can do in some cases? Let&amp;rsquo;s find out. Let&amp;rsquo;s say that we need to perform an end to end test of our blog. We want to be sure that included github link is working properly. First we need to visit our blog:
+cy.visit(&amp;lsquo;https://thebugger.io/&#39;);
+Then, in order to check if github link is working, we need to click it and see if the outcome of this action is correct.</description>
+    </item>
+    
     <item>
       <title>Cypress - advantages and disadvantages</title>
       <link>https://jjaworski93.github.io/post/post6/</link>

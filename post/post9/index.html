@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Page Objects in Cypress - introduction &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">September 2, 2021</span>
+                                
+                                <h1>Page Objects in Cypress - introduction</h1>
+                                <p>How to use Page Objects in Cypress? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/cypressPageObjectsCompressed.png" alt="" /></div>
+                            
+                            <h5 id="in-this-short-article-we-are-going-to-learn-how-to-use-page-objects-in-cypress">In this short article we are going to learn how to use Page Objects in Cypress.</h5>
+<p><strong>Page Objects</strong> make end-to-end tests readable and easy to maintain. Among others there are three main benefits of using them:</p>
+<ul>
+<li>Keeping all page element selectors in one place</li>
+<li>Possibility to use Page Objects in multiple tests</li>
+<li>Standardizing how tests interact with the page</li>
+</ul>
+<p>To simplyfy, we can say, that <strong>Page Object</strong> encapsulates the mechanics in GUI and allows us to find and manipulate page elements without digging around in the HTML. Let&rsquo;s create our first Page Object. We will place there all the common reusable functions like launching the web app.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BaseFunctions</span> {
+ 
+    <span style="color:#a6e22e">launchWebApp</span>() {
+     <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#34;https://our-link.com&#34;</span>);
+    }
+
+    <span style="color:#a6e22e">checkIfLogInBtnExists</span>() {
+     <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;[href*=&#34;labelhost/login&#34;]&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#34;exist&#34;</span>);
+    }
+
+    <span style="color:#a6e22e">clickLogInBtn</span>() {
+     <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;[href*=&#34;labelhost/login&#34;]&#39;</span>).<span style="color:#a6e22e">click</span>();
+    }
+ 
+    <span style="color:#a6e22e">logOutFromWebApp</span>(){
+     <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#39;Log Out&#39;</span>).<span style="color:#a6e22e">click</span>();
+    }
+ 
+}
+ 
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">BaseFunctions</span> 
+</code></pre></div><p>Now, we can create another <strong>Page Object</strong>, where we will be going through the <em>log in</em> process. We can do that, for example, by extending our BaseFunctions class:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">BaseFunctions</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./BaseFunctions&#34;</span>
+ 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginPage</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">BaseFunctions</span> {
+ 
+    <span style="color:#a6e22e">login</span>(){
+        
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">baseFunctions</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BaseFunctions</span>();
+        <span style="color:#a6e22e">baseFunctions</span>.<span style="color:#a6e22e">launchWebApp</span>();
+        <span style="color:#a6e22e">baseFunctions</span>.<span style="color:#a6e22e">checkIfLogInBtnExists</span>();
+        <span style="color:#a6e22e">baseFunctions</span>.<span style="color:#a6e22e">clickLogInBtn</span>();
+         
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#username&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;username&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#password&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;password {enter}&#34;</span>);
+ 
+    }
+ 
+}
+ 
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">LoginPage</span> 
+</code></pre></div><p>What we did here is:</p>
+<ul>
+<li>We imported the BaseFunctions class.</li>
+<li>We created a method for login process.</li>
+<li>By instantiation of the BaseFunction class with a constant, we could call the method from this class to launch our webapp, check if login button exists and click it.</li>
+<li>Then, we entered the credentials and &ldquo;hit&rdquo; enter (<em>type(&ldquo;password {enter}&quot;)</em>) to login into the webapp.</li>
+<li>In the last step, we exported this class so that we can use it from another class.</li>
+</ul>
+<p>Now, let&rsquo;s create a bit more <strong>advanced Page Object class</strong>, in which we will go through <em>registration process</em> and learn more about <strong>aliases</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">BaseFunctions</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;./BaseFunctions&#34;</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RegistrationPage</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">BaseFunctions</span> {
+ 
+    <span style="color:#a6e22e">navigateToRegistrationPage</span>() {
+     <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">baseFunctions</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BaseFunctions</span>();
+     <span style="color:#a6e22e">baseFunctions</span>.<span style="color:#a6e22e">launchWebApp</span>(); 
+     <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#registrationBTN&#39;</span>).<span style="color:#a6e22e">click</span>();
+    }
+ 
+    <span style="color:#a6e22e">enterRegistrationData</span>(){
+     <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">navigateToRegistrationPage</span>()
+ 
+        <span style="color:#75715e">// Registration locators with assigned Aliases
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#firstName&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;firstName&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#lastName&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;lastName&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#nickName&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;nickName&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#phoneNumber&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;phone&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#email&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;email&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#registrationStatusMessage&#39;</span>).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#34;regiMSG&#34;</span>);
+ 
+        <span style="color:#75715e">// Using aliases to enter data needed for registration process
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@firstName&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;Jakub&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@lastName&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;Cypress&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@nickName&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;Thebugger&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@phone&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;789456123&#34;</span>);
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@email&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#34;cypress@automation.com {enter}&#34;</span>);
+ 
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">checkRegistrationResponse</span>()
+    }
+ 
+    <span style="color:#a6e22e">checkRegistrationResponse</span>() {    
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@regiMSG&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#34;have.text&#34;</span>,<span style="color:#e6db74">&#34;Registration completed! Check your email.&#34;</span>);
+    } 
+}
+ 
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">RegistrationPage</span>
+</code></pre></div><p>The main purpose of the <strong>aliases</strong> is to store the locators, so that we can easily use their values whenever we need them, just by calling their name. Also, let’s say that some locator will be changed, then we don’t have to update it in multiple places, rather just in one place where we have defined this locator.</p>
+<p>Now it is a time to call the <strong>Page Objects</strong> in our spec file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#75715e">/// &lt;reference types=&#34;cypress&#34; /&gt;
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">BaseFunctions</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;../../pageObjects/BaseFunctions&#34;</span> 
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">LoginPage</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;../../pageObjects/LoginPage&#34;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">RegistrationPage</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;../../pageObjects/RegistrationPage&#34;</span>
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">baseFunctions</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BaseFunctions</span> 
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">loginPage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">LoginPage</span>
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">registrationPage</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">RegistrationPage</span>
+ 
+<span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#34;Registration Process Check&#34;</span>, () =&gt; {
+ 
+    <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#34;Register&#34;</span>, () =&gt; {
+        <span style="color:#a6e22e">loginPage</span>.<span style="color:#a6e22e">login</span>();
+        <span style="color:#a6e22e">registrationPage</span>.<span style="color:#a6e22e">enterRegistrationData</span>();
+        <span style="color:#a6e22e">registrationPage</span>.<span style="color:#a6e22e">checkRegistrationResponse</span>();
+    })
+ 
+})
+</code></pre></div><p>To summarize, <strong>Page Objects</strong> improve readability of our tests and make them easier to maintain. However, when it comes to work with a large-scale projects, this may mean the necessity to create more and more new class files. Therefore, in one of the upcoming articles I will try to write a bit about <strong>App Actions</strong> in Cypress.</p>
+<p>Hope this article was helpful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
