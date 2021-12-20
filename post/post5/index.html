@@ -50,7 +50,7 @@
                                 <p>You may come across situations where Selenium WebDriver alone will not be able to perform certain operations or interact with some web elements or maybe you just like to work with JS. If this is a case, JavascriptExecutor comes in handy. Let’s have a look on some examples.</p>
                             </header>
                             
-                            <div class="image main"><img src="/images/seleniumJS.jpg" alt="" /></div>
+                            <div class="image main"><img src="/images/seleniumJS.png" alt="" /></div>
                             
                             <h5 id="it-turns-that-crayfish-might-be-much-smarter-than-we-have-ever-imagined-so-clever-they-can-grow-new-brain-cells-from-their-own-blood-however-this-article-will-be-about-javascriptexecutor-in-selenium">It turns that Crayfish might be much smarter than we have ever imagined. So clever, they can grow new brain cells from their own blood. However, this article will be about JavascriptExecutor in Selenium.</h5>
 <p>You may come across situations where <strong>Selenium WebDriver</strong> alone will not be able to perform certain operations or interact with some web elements, like unexpected pop-ups. In that case, <strong>JavascriptExecutor</strong> comes in handy. Let’s have a closer look on that topic.</p>
@@ -68,10 +68,10 @@
 
 </code></pre></div><p>Let’s have a look on some <strong>executeScript</strong> usage examples:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JAVA" data-lang="JAVA"><span style="color:#75715e">// clicking the button
-</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">“</span>document<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementByID</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">‘</span>id<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#f92672">).</span><span style="color:#a6e22e">click</span><span style="color:#f92672">();</span><span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;document.getElementByID(&#39;id&#39;).click();&#34;</span><span style="color:#f92672">);</span>
 
 <span style="color:#75715e">// sending the text
-</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">“</span>document<span style="color:#f92672">.</span><span style="color:#a6e22e">getElementByID</span><span style="color:#f92672">(</span><span style="color:#960050;background-color:#1e0010">‘</span>id<span style="color:#960050;background-color:#1e0010">‘</span><span style="color:#f92672">).</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#960050;background-color:#1e0010">‘</span>some text<span style="color:#960050;background-color:#1e0010">’</span><span style="color:#f92672">;</span><span style="color:#960050;background-color:#1e0010">”</span><span style="color:#f92672">);</span>
+</span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;document.getElementByID(&#39;id&#39;).value = &#39;some text&#39;;&#34;</span><span style="color:#f92672">);</span>
 
 <span style="color:#75715e">// scrolling to the bottom of the page
 </span><span style="color:#75715e"></span>js<span style="color:#f92672">.</span><span style="color:#a6e22e">executeScript</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;window.scrollTo(0, document.body.scrollHeight);&#34;</span><span style="color:#f92672">);</span>
