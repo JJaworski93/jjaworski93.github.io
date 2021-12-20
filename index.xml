@@ -6,7 +6,16 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 06 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jun 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cypress - advantages and disadvantages</title>
+      <link>https://jjaworski93.github.io/post/post6/</link>
+      <pubDate>Thu, 03 Jun 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post6/</guid>
+      <description>To convince anyone how beneficial automated software testing is, is not needed. Automated software testing is much faster than manual testing and what is most important - it is repeatable. We need to rememberr however, that automated testing should be a great supplement and support for manual testing - not a replacement. The test script works only as it was programmed and does a great job. However, nothing can replace the skilled eye of an experienced tester.</description>
+    </item>
+    
     <item>
       <title>JavaScriptExecutor in Selenium - introduction</title>
       <link>https://jjaworski93.github.io/post/post5/</link>
