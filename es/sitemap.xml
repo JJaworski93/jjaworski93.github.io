@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://jjaworski93.github.io/es/</loc>
+    <lastmod>2021-01-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://jjaworski93.github.io/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="https://jjaworski93.github.io/es/"
+                />
+  </url><url>
+    <loc>https://jjaworski93.github.io/es/post/post1/</loc>
+    <lastmod>2021-01-07T00:00:00+00:00</lastmod>
+  </url>
+</urlset>

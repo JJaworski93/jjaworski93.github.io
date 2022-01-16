@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About Me</title>
+    <link>https://jjaworski93.github.io/es/</link>
+    <description>Recent content on About Me</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 07 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/es/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>This is a short page about me and my work</title>
+      <link>https://jjaworski93.github.io/es/post/post1/</link>
+      <pubDate>Thu, 07 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/es/post/post1/</guid>
+      <description>Thanks for reading!</description>
+    </item>
+    
+  </channel>
+</rss>
