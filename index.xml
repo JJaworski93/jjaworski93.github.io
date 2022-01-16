@@ -87,10 +87,10 @@ Then, in order to check if github link is working, we need to click it and see i
     
     <item>
       <title>The differences between TDD and BDD</title>
-      <link>https://jjaworski93.github.io/post/post3/</link>
+      <link>https://jjaworski93.github.io/post/post30/</link>
       <pubDate>Thu, 04 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://jjaworski93.github.io/post/post3/</guid>
+      <guid>https://jjaworski93.github.io/post/post30/</guid>
       <description>In this blog post we are going to discover the main differences between two testing-related concepts - Test Driven Development and Behavior Driven Development. TDD and BDD are two widely used software development techniques in which automated testing plays a central role. Today we are going to explore the differences.
 Let&amp;rsquo;s start with Test Driven Development. Typically, in this technique, we write tests for a certain piece of functionality before writing the production code.</description>
     </item>
