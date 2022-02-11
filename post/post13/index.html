@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>JavaScript Best Practices - Cheatsheet (No. 1) &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">January 6, 2022</span>
+                                
+                                <h1>JavaScript Best Practices - Cheatsheet (No. 1)</h1>
+                                <p>JavaScript Tips and Best Practices - Cheatsheet</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/numberone.jpeg" alt="" /></div>
+                            
+                            <h2 id="javascript---a-list-of-the-tips-and-best-practices">JavaScript - a list of the Tips and Best Practices.</h2>
+<p>In this article, I decided to gather some of the <strong>JavaScript tips and best practices</strong>. Let&rsquo;s get right into it!</p>
+<p><strong>1. Truthy / Falsy values</strong> - in JavaScript all values, except those listed below, are considered to be truthy:</p>
+<ul>
+<li>false</li>
+<li>0 (but not as a string)</li>
+<li>““ and '' (empty strings)</li>
+<li>null</li>
+<li>undefined</li>
+<li>NaN (Not a Number)</li>
+</ul>
+<p><strong>2. Converting string to a number with + operator.</strong> Let&rsquo;s see it with an example:</p>
+<p><img src="/images/plusoperator.png" alt="PlusOperator"></p>
+<p><strong>3. Numbers in JS</strong> - unlike many other programming languages, JavaScript does not define different types of numbers (like integers, long, floating-point etc.). In JavaScript all numbers are stored as double precision floating point numbers, following the international IEEE 754 standard. Due to the binary nature of their encoding, some decimal numbers cannot be represented with perfect accuracy and this can lead to calculation errors. Let&rsquo;s see such error with possible solution:</p>
+<p><img src="/images/calcerror.png" alt="CalcError"></p>
+<p>*we used <strong>+ operator</strong> because <strong>toFixed()</strong> method converts a number to a string.</p>
+<p><strong>4. Comparison operators.</strong> Remember that comparing two elements with different types may give you unexpected results. For example, when comparing a string with a number, JavaScript will convert the string to a number when doing the comparison. An empty string will be converted to 0 and a non-numeric string will be converted to NaN which is always false. Let&rsquo;s see couple of examples:</p>
+<p><img src="/images/comparing.png" alt="ComparingExamples"></p>
+<p>in our example <strong>&ldquo;5&rdquo;</strong> is considered to be greater than <strong>&ldquo;15&rdquo;</strong>, because (alphabetically) 1 is less than 5. In connection with the above, it is considered a best practice to use <strong>===</strong> and <strong>!==</strong> instead of <strong>==</strong> and <strong>!=</strong>. Because it compares the value and the type. Let see some examples:</p>
+<p><img src="/images/comparison.png" alt="ComparingExamples"></p>
+<p><strong>5. Strings in JS are immutable</strong> - this means they cannot be modified or changed once created. Every change or modification will mean the need to create a new String. Let&rsquo;s have a look on an example:</p>
+<p><img src="/images/immutableString.png" alt="ImmutableString"></p>
+<p>*as we can see, our variable <strong>immutableString</strong> keeps its initial form - <strong>&ldquo;Hello World&rdquo;</strong> (not UpperCased).</p>
+<p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

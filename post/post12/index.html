@@ -2,7 +2,7 @@
 
 <html lang='en'>
 	<head>
-		<title>Https but still not secure? &middot; Software Testing Blog - thebugger.io</title>
+		<title>Chrome DevTools - a built-in color picker &middot; Software Testing Blog - thebugger.io</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
@@ -62,28 +62,30 @@
                         <section class="post">
                             <header class="major">
                                 
-                                <span class="date">October 7, 2021</span>
+                                <span class="date">December 2, 2021</span>
                                 
-                                <h1>Https but still not secure?</h1>
-                                <p>Does your URL start with HTTPS but still is marked as not secure? - Possible solution.</p>
+                                <h1>Chrome DevTools - a built-in color picker</h1>
+                                <p>Did you know that Chrome DevTools comes with a built-in color picker?</p>
                             </header>
                             
-                            <div class="image main"><img src="/images/notsecuree.png" alt="" /></div>
+                            <div class="image main"><img src="/images/colorpicking.jpeg" alt="" /></div>
                             
-                            <h2 id="does-your-url-start-with-https-but-still-is-marked-as-not-secure-lets-take-a-closer-look-at-it">Does your URL start with HTTPS but still is marked as not secure? Let&rsquo;s take a closer look at it.</h2>
-<p>HTTPS stands for “Hypertext Transfer Protocol Secure”. It allows for the secure flow of information between a server and client. It may happen that although your URL starts with HTTPS and there is nothing wrong with your SSL certificate, web browsers will indicate that connection to your site is not secure:</p>
-<p><img src="/images/notsecureee.png" alt="NotSecureConnection"></p>
-<p>If this is a case, most likely it is caused by:</p>
+                            <h2 id="google-chrome-devtools---a-built-in-color-picker-that-you-probably-didnt-know-existed">Google Chrome DevTools - a built-in color picker that you probably didn&rsquo;t know existed.</h2>
+<p><strong>Chrome DevTools</strong> is a set of very useful tools built directly into the browser. Among all these tools, there is also a <strong>color picker</strong> which this post will be about. Let&rsquo;s start.</p>
+<p>First we need to open <strong>Chrome DevTools</strong>. You can do this by using keyboard shortcuts:</p>
 <ul>
-<li>calls to a non-secure 3rd party resources like images</li>
+<li>Ctrl + Shift + I (Windows)</li>
+<li>Command + Option + I (Mac)</li>
 </ul>
-<p>You can investigate it with Chrome using DevTools. To do that, right-click anywhere on the page and choose “Inspect”. Once DevTools is open, navigate to “Security”:</p>
-<p><img src="/images/notsecureeee.png" alt="DevToolsSecurity"></p>
-<p>Here you will be able to check what is causing your page to be considered as not secure. Also, if you will refresh the page, Chrome DevTools will show you the exact resources that are causing the issues:</p>
-<p><img src="/images/notsecureeeee.png" alt="httpResources"></p>
-<p><img src="/images/notsecureeeeee.png" alt="networkPanel"></p>
-<p>As we can see in the above case, the problem was caused by one of the images that our webpage uses (image URL starts with http:// instead of https://). This is a common case where a website uses images from secondary domains. Unfortunately, if we use resources from secondary domains which are not secure - our page will also be considered as not secure.</p>
-<p>To solve this <em>&ldquo;HTTPS but still not secure&rdquo;</em> problem, you could choose a different secure host for your resources. Also, if you own this secondary domain - you can consider migrating it to HTTPS.</p>
+<p>or you can just right-click somewhere on the page and then select “<strong>Inspect</strong>”:</p>
+<p><img src="/images/colorpicking1.png" alt="DevTools"></p>
+<p>Once you launch the <strong>DevTools</strong>, just select the element whose color you would like to modify:</p>
+<p><img src="/images/colorpicking2.png" alt="DevTools"></p>
+<p>Now, in the &ldquo;<strong>Styles</strong>&rdquo; tab we can see that it&rsquo;s color is <em>#1877f2</em>. Click on the color box. This will present more options for you, as per below screenshot:</p>
+<p><img src="/images/colorpicking3.png" alt="DevTools"></p>
+<p>Here, you can easily modify it&rsquo;s color and opacity but also there is a built-in color picking tool, so you can check and copy color of any element you want:</p>
+<p><img src="/images/colorpicking4.png" alt="DevTools"></p>
+<p>Hope this article was useful.</p>
 <p>Thanks for reading!</p>
 
 

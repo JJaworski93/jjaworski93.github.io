@@ -6,7 +6,29 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 Jan 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript Best Practices - Cheatsheet (No. 1)</title>
+      <link>https://jjaworski93.github.io/post/post13/</link>
+      <pubDate>Thu, 06 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post13/</guid>
+      <description>JavaScript - a list of the Tips and Best Practices. In this article, I decided to gather some of the JavaScript tips and best practices. Let&amp;rsquo;s get right into it!
+1. Truthy / Falsy values - in JavaScript all values, except those listed below, are considered to be truthy:
+ false 0 (but not as a string) ““ and &#39;&#39; (empty strings) null undefined NaN (Not a Number)  2. Converting string to a number with + operator.</description>
+    </item>
+    
+    <item>
+      <title>Chrome DevTools - a built-in color picker</title>
+      <link>https://jjaworski93.github.io/post/post12/</link>
+      <pubDate>Thu, 02 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post12/</guid>
+      <description>Google Chrome DevTools - a built-in color picker that you probably didn&amp;rsquo;t know existed. Chrome DevTools is a set of very useful tools built directly into the browser. Among all these tools, there is also a color picker which this post will be about. Let&amp;rsquo;s start.
+First we need to open Chrome DevTools. You can do this by using keyboard shortcuts:
+ Ctrl + Shift + I (Windows) Command + Option + I (Mac)  or you can just right-click somewhere on the page and then select “Inspect”:</description>
+    </item>
+    
     <item>
       <title>Running Cypress Test Script on multiple URLs</title>
       <link>https://jjaworski93.github.io/post/post11/</link>

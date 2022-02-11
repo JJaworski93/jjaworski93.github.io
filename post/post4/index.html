@@ -70,7 +70,7 @@
                             
                             <div class="image main"><img src="/images/waitsInSelenium.png" alt="" /></div>
                             
-                            <h5 id="lets-have-a-closer-look-at-implicit-and-explicit-wait-in-selenium">Let&rsquo;s have a closer look at Implicit and Explicit Wait in Selenium.</h5>
+                            <h2 id="lets-have-a-closer-look-at-implicit-and-explicit-wait-in-selenium">Let&rsquo;s have a closer look at Implicit and Explicit Wait in Selenium.</h2>
 <p>The <strong>wait commands</strong> play essential role when it comes to automated testing. They help to avoid issues that may occur due to variation in time lag. When the webpage loads in the browser, its elements may load at different time intervals. This may lead to the situation in which our automated test will look for an element that is not yet loaded and an exception will be thrown - <em>ElementNotVisibleException</em>. This is when <strong>Wait Commands</strong> come in handy. In this article, we will focus on <strong>Implicit and Explicit Wait in Selenium</strong>.</p>
 <p>The <strong>Implicit Wait</strong> tells the <strong>WebDriver</strong> to wait for a certain amount of time before throwing an <em>ElementNotVisibleException</em>. The initial value is 0 but we can easily modify it. Once we set the specific time, the web driver will wait for the element for that time before throwing an exception.</p>
 <p>Let&rsquo;s create our first <strong>Implicit Wait</strong> with the time frame of <strong>15 seconds</strong>. This way, if the element won&rsquo;t be located on the webpage within that time frame, it will throw an exception. The syntax here will be:</p>
