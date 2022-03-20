@@ -6,7 +6,18 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JavaScript Best Practices - Cheatsheet (No. 3)</title>
+      <link>https://jjaworski93.github.io/post/post15/</link>
+      <pubDate>Thu, 03 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post15/</guid>
+      <description>JavaScript - a third list of the Tips and Best Practices. This is the third article in the JavaScript Tips &amp;amp; Best Practices series. Let&amp;rsquo;s get straight to the point.
+11. Verify that given argument is a number - to verify that a given argument is a number, we could use below function:
+function isNumber(n){ return !isNaN(parseFloat(n)) &amp;amp;&amp;amp; isFinite(n); } console.log(isNumeric(12345)); // true console.log(isNumeric(&amp;#39;5 &amp;#39;)); // true console.log(isNumeric(&amp;#34;-55.1 &amp;#34;)); // true console.</description>
+    </item>
+    
     <item>
       <title>JavaScript Best Practices - Cheatsheet (No. 2)</title>
       <link>https://jjaworski93.github.io/post/post14/</link>
