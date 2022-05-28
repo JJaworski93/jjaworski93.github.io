@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>JavaScript Best Practices - Cheatsheet (No. 4) &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">April 7, 2022</span>
+                                
+                                <h1>JavaScript Best Practices - Cheatsheet (No. 4)</h1>
+                                <p>JavaScript Tips and Best Practices - Cheatsheet</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/javascriptttttt.jpeg" alt="" /></div>
+                            
+                            <h2 id="javascript---a-fourth-list-of-the-tips-and-best-practices">JavaScript - a fourth list of the Tips and Best Practices.</h2>
+<p>This is the fourth article in the JavaScript Tips &amp; Best Practices series. Let&rsquo;s get right into it.</p>
+<p><strong>16. Merging arrays with spread operator.</strong> The <em>Spread Operator</em> (three dots) has many different uses and I will definitely write a separate article about it. Basically, the <em>Spread Operator</em> allows us to spread out elements of an iterable object such as an <em>Array</em>, <em>Set</em>, or <em>Map</em>. Today, however, let us see a merging arrays examples:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">someNumbers</span> <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">188</span>];
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">moreNumbers</span> <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">799</span>, <span style="color:#ae81ff">99</span>];
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">finalNumbers</span> <span style="color:#f92672">=</span> [...<span style="color:#a6e22e">someNumbers</span>, ...<span style="color:#a6e22e">moreNumbers</span>];
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">finalNumbers</span>); <span style="color:#75715e">// [-11, 0, 15, 188, -2, 799, 99]
+</span><span style="color:#75715e"></span>
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">someNumbers</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>];
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">combinedNumbers</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, ...<span style="color:#a6e22e">someNumbers</span>, <span style="color:#ae81ff">7</span>];
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">combinedNumbers</span>); <span style="color:#75715e">// [1, 2, 3, 4, 5, 6, 7]
+</span></code></pre></div><p><strong>17. Getting the last item(s) from an array.</strong> To get the last item(s) from an array we can use slice:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">array</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)); <span style="color:#75715e">// [5]
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>)); <span style="color:#75715e">// [4, 5]
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>)); <span style="color:#75715e">// [3, 4, 5]
+</span></code></pre></div><p>To get the last item from an array we can use also length:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">array</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>];
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">array</span>[<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]); <span style="color:#75715e">// [5]
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">array</span>[<span style="color:#a6e22e">array</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]); <span style="color:#75715e">// [4]
+</span></code></pre></div><p><strong>18. Filtering unique values/Removing duplicates.</strong> To filter unique values in JS, we can use <em>Set</em> with <em>Spread Operator</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">myArray</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">5</span>, <span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>];
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">uniqueValues</span> <span style="color:#f92672">=</span> [...<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Set</span>(<span style="color:#a6e22e">myArray</span>)];
+
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">uniqueValues</span>); <span style="color:#75715e">// [&#34;abc&#34;, 1, 2, 3, &#39;a&#39;, -5, &#39;1&#39;]
+</span></code></pre></div><p>In this case, the constructor of <em>Set</em> takes an iterable object (like an <em>Array</em>) and the <em>Spread Operator</em> (<em>&hellip;</em>) transforms the <em>Set</em> back into an <em>Array</em>.</p>
+<p><strong>19. Mapping an Array with .from().</strong> We can also use <em>.from()</em> method to easily map an <em>Array</em>. Let&rsquo;s see an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">team</span> <span style="color:#f92672">=</span> [
+    {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Ada&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">28</span>},
+    {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Ala&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">25</span>},
+    {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Alex&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">25</span>},
+    {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Jakob&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">27</span>},
+    {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Naomi&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">37</span>}
+];
+ 
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">membersName</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">team</span>, ({<span style="color:#a6e22e">name</span>}) =&gt; <span style="color:#a6e22e">name</span>);
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">friendsNames</span>); <span style="color:#75715e">// [&#39;Ada&#39;, &#39;Ala&#39;, &#39;Alex&#39;, &#39;Jakob&#39;, &#39;Naomi&#39;]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">membersAge</span> <span style="color:#f92672">=</span> Array.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">team</span>, ({<span style="color:#a6e22e">age</span>}) =&gt; <span style="color:#a6e22e">age</span>);
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">friendsNames</span>); <span style="color:#75715e">// [28, 25, 25, 27, 37]
+</span></code></pre></div><p><strong>20. Converting an Array to an Object with Spread Operator.</strong> To achieve this, we can use our already well-known <em>Spread Operator</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">team</span> <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Ada&#34;</span>, <span style="color:#e6db74">&#34;Ala&#34;</span>, <span style="color:#e6db74">&#34;Alex&#34;</span>, <span style="color:#e6db74">&#34;Jakob&#34;</span>];
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">teamObject</span> <span style="color:#f92672">=</span> {...<span style="color:#a6e22e">team</span>};
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">teamObject</span>); <span style="color:#75715e">// {0: &#34;Ada&#34;, 1: &#34;Ala&#34;, 2: &#34;Alex&#34;, 3: &#34;Jakob&#34;}
+</span></code></pre></div><p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
