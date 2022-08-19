@@ -87,7 +87,7 @@ First we need to open Chrome DevTools. You can do this by using keyboard shortcu
       <pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate>
       
       <guid>https://jjaworski93.github.io/post/post10/</guid>
-      <description>Does your URL start with HTTPS but still is marked as not secure? Let&amp;rsquo;s take a closer look at it. HTTPS stands for “Hypertext Transfer Protocol Secure”. It allows for the secure flow of information between a server and client. It may happen that although your URL starts with HTTPS and there is nothing wrong with your SSL certificate, web browsers will indicate that connection to your site is not secure:</description>
+      <description>Does your URL start with HTTPS but still is marked as not secure? Let&amp;rsquo;s take a closer look at it. HTTP (Hypertext Transfer Protocol) is a protocol that enables communication between the client and the server. Its job is to identify, share and convert the content so that the content can be read correctly by the server. The user sends a request to the server (e.g. by entering a website address) and within a moment receives a response (displaying a given page).</description>
     </item>
     
     <item>
