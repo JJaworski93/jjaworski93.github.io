@@ -6,7 +6,29 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pseudo Website Scraper</title>
+      <link>https://jjaworski93.github.io/post/post19/</link>
+      <pubDate>Thu, 07 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post19/</guid>
+      <description>Let&amp;rsquo;s create a pseudo data scraper with copy() function and browser console. The copy() function can be used to easily fetch some data from the page. For example, let&amp;rsquo;s say that we want to fetch the list of all the team members from Our Team gallery that looks like this:
+&amp;lt;img src=&amp;#34;name_familyname.jpg&amp;#34; alt=&amp;#34;Name Familyname&amp;#34; width=&amp;#34;500&amp;#34; height=&amp;#34;600&amp;#34;&amp;gt; In this case, we can use the copy() function and alt attribute:
+copy($$(&amp;#39;img&amp;#39;).map(img =&amp;gt; img.</description>
+    </item>
+    
+    <item>
+      <title>Terminal Commands - Cheatsheet</title>
+      <link>https://jjaworski93.github.io/post/post18/</link>
+      <pubDate>Thu, 02 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post18/</guid>
+      <description>Terminal - list of essential commands. With so many Terminal commands, it is difficult to remember all of them. That is why I prepared a cheatsheet list of essential Terminal commands.
+Hope this article was useful.
+Thanks for reading!</description>
+    </item>
+    
     <item>
       <title>JavaScript Best Practices - Cheatsheet (No. 5)</title>
       <link>https://jjaworski93.github.io/post/post17/</link>

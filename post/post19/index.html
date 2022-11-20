@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Pseudo Website Scraper &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">July 7, 2022</span>
+                                
+                                <h1>Pseudo Website Scraper</h1>
+                                <p>We can use the copy() function to scrape data from the webpage. How? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/datascraper1.png" alt="" /></div>
+                            
+                            <h2 id="lets-create-a-pseudo-data-scraper-with-copy-function-and-browser-console">Let&rsquo;s create a pseudo data scraper with copy() function and browser console.</h2>
+<p>The <strong>copy()</strong> function can be used to easily fetch some data from the page. For example, let&rsquo;s say that we want to fetch the list of all the team members from <em>Our Team</em> gallery that looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Javascript" data-lang="Javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;name_familyname.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Name Familyname&#34;</span> <span style="color:#a6e22e">width</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;500&#34;</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;600&#34;</span><span style="color:#f92672">&gt;</span>
+</code></pre></div><p>In this case, we can use the <strong>copy()</strong> function and <strong>alt</strong> attribute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">$$</span>(<span style="color:#e6db74">&#39;img&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">img</span> =&gt; <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">alt</span>).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;\n&#39;</span>))
+</code></pre></div><p>Let&rsquo;s see this in action (remember however, that copy() function will copy anything we passed to it as an argument but it won&rsquo;t display anything in the console. We need to paste the values manually):</p>
+<p><img src="/images/datascraperimg.png" alt="BrowserConsoleResult"></p>
+<p>Let us see some more examples. For instance, let&rsquo;s scrape all the URLs found on a page:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">$$</span>(<span style="color:#e6db74">&#39;a&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">a</span> =&gt; <span style="color:#a6e22e">a</span>.<span style="color:#a6e22e">href</span>).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;\n&#39;</span>))
+</code></pre></div><p>or all the options from a dropdown list:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">copy</span>(<span style="color:#a6e22e">$$</span>(<span style="color:#e6db74">&#39;option&#39;</span>).<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">option</span> =&gt; <span style="color:#a6e22e">option</span>.<span style="color:#a6e22e">text</span>).<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#39;\n&#39;</span>))
+</code></pre></div><p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
