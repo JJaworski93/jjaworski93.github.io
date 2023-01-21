@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Fuzz Testing with Cypress &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">August 4, 2022</span>
+                                
+                                <h1>Fuzz Testing with Cypress</h1>
+                                <p>Is it possible to perform a Fuzz Testing in Cypress? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/login.jpg" alt="" /></div>
+                            
+                            <h2 id="fuzz-testing-is-a-method-of-software-testing-that-involves-providing-invalid-unexpected-or-random-data-called-fuzz-into-a-software-system-in-order-to-discover-errors-crashes-and-security-loopholes-could-such-test-be-performed-in-cypress">Fuzz Testing is a method of Software Testing that involves providing invalid, unexpected or random data called FUZZ into a Software System in order to discover errors, crashes and security loopholes. Could such test be performed in Cypress?</h2>
+<p>The goal of <strong>Fuzz Testing</strong> is to find bugs that are difficult to discover through manual testing. Such test is often used to test the security of a system by attempting to find vulnerabilities that could be exploited by an attacker.</p>
+<p>As you probably already know, <strong>Cypress</strong> is a JavaScript-based end-to-end testing framework and it does not natively support <strong>Fuzz Testing</strong>. However, we can use Cypress to automate the process of providing data to a web application, and then use a fuzz testing tool to generate the invalid, unexpected or random inputs that we want to test with. In that case a <strong>cypress-fuzz-testing</strong> library comes in handy. This library allows us to mutate our test inputs and perform fuzz testing in our Cypress test runs.
+Additionally, Cypress allows us to write and execute tests using JavaScript, which means that we can use any JavaScript library/tool that supports Fuzz Testing in our Cypress tests, as long as they are properly incorporated in the test script.</p>
+<p>Here&rsquo;s an example of a simple Cypress Test Script that uses the cypress-fuzz-testing library to perform fuzz testing on a login form:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Login Form Fuzz Testing&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">beforeEach</span>(() =&gt; {
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)
+    })
+
+    <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Fuzz Test for Login Form&#39;</span>, () =&gt; {
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">fuzz</span>(<span style="color:#ae81ff">100</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">inputs</span> =&gt; {
+            <span style="color:#a6e22e">inputs</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">input</span> =&gt; {
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#username&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">username</span>)
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#password&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">password</span>)
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#submit&#39;</span>).<span style="color:#a6e22e">click</span>()
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.error&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>)
+            })
+        })
+    })
+})
+</code></pre></div><p>In above example, we use the <strong>cy.fuzz(100)</strong> function to generate 100 sets of random input for the login form&rsquo;s username and password fields. The generated inputs are then used to fill in the form and submit it. The test then asserts that no error message is displayed on the page.</p>
+<p>We can of course adjust the number of inputs generated by the cy.fuzz() function as well as the type of inputs that it generates. It also allows us to set constraints on the generated inputs so that they meet certain requirements.</p>
+<p>Let&rsquo;s have a look on a bit more advanced example. Here, we will also perform a fuzz test on a login form but with additional constraints and validation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Login Form Fuzz Testing&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">beforeEach</span>(() =&gt; {
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;/login&#39;</span>)
+    })
+
+    <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Fuzz test login form&#39;</span>, () =&gt; {
+        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">fuzz</span>(<span style="color:#ae81ff">100</span>, {
+            <span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> {
+                <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;string&#39;</span>,
+                <span style="color:#a6e22e">min</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">5</span>,
+                <span style="color:#a6e22e">max</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">20</span>
+            },
+            <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> {
+                <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;string&#39;</span>,
+                <span style="color:#a6e22e">min</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">8</span>,
+                <span style="color:#a6e22e">max</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">15</span>,
+                <span style="color:#a6e22e">regex</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/^(?=.*[A-Z])(?=.*[!@#$%^&amp;*])[a-zA-Z0-9!@#$%^&amp;*]{8,15}$/</span>
+            }
+        }).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">inputs</span> =&gt; {
+            <span style="color:#a6e22e">inputs</span>.<span style="color:#a6e22e">forEach</span>(<span style="color:#a6e22e">input</span> =&gt; {
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#username&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">username</span>)
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#password&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">input</span>.<span style="color:#a6e22e">password</span>)
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#submit&#39;</span>).<span style="color:#a6e22e">click</span>()
+                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.error&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>)
+            })
+        })
+    })
+})
+</code></pre></div><p>In this example, again, the cy.fuzz(100) function is used to generate 100 sets of random input for the login form&rsquo;s username and password fields. The username field has to be a string with at least 5 characters and at most 20 characters, the password field has to be a string with at least 8 characters and at most 15 characters, and it also has to match a specific <strong>regex</strong>. The generated inputs are then used to fill in the form and submit it. The test then asserts that no error message is displayed on the page. Additionally, it is worth to mention, that we should also validate the outputs of our application, not only the inputs.</p>
+<p>In the above example, the regex option is used to specify a regular expression that the generated password input must match. A regular expression, or regex for short, is a pattern that describes a set of strings. It is used to check if a string matches a particular pattern or not. The regular expression used in the example is checking for specific conditions in the password:</p>
+<ul>
+<li><strong>(?=.*[A-Z])</strong> - this asserts that the password must contain at least one uppercase letter.</li>
+<li><strong>(?=.[!@#$%^&amp;*])</strong> - this asserts that the password must contain at least one special character from the set (!@#$%^&amp;*).</li>
+<li><strong>[a-zA-Z0-9!@#$%^&amp;*]{8,15}</strong> - this asserts that the password must contain only lowercase and uppercase letters, digits, and special characters from the set (!@#$%^&amp;*), and its length must be between 8 and 15 characters.</li>
+<li><strong>^ and $</strong> - these are special characters that assert the start and end of the string, so it only matches the whole string and not a substring
+The purpose of using this regex is to ensure that the generated input for the password field meets the specific requirements of the application&rsquo;s password validation rules. This way, the fuzz testing can uncover any potential issues in the password validation process, such as the application accepting passwords that do not meet the required complexity or length.</li>
+</ul>
+<p>Let&rsquo;s have a look on the last example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Login Fuzz Test&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should test login with different input combinations and check for validation errors&#39;</span>, () =&gt; {
+        <span style="color:#75715e">// Fuzz test data
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">fuzzTestData</span> <span style="color:#f92672">=</span> [
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Please enter a username&#39;</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Please enter a password&#39;</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;password&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Please enter a username&#39;</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;password&#39;</span>, <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user@example.com&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;p@ssword123&#39;</span>, <span style="color:#a6e22e">success</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user@example.com&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;p@ssword321&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid password&#39;</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user@example.c&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;password&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Invalid email address&#39;</span>},
+            {<span style="color:#a6e22e">username</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;user@example.com&#39;</span>, <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;passwo&#39;</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;The password must have at least 8 characters&#39;</span>},
+        ];
+
+        <span style="color:#75715e">// Loop through each test data
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">fuzzTestData</span>.<span style="color:#a6e22e">forEach</span>((<span style="color:#a6e22e">testData</span>) =&gt; {
+            <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;/login&#39;</span>);
+
+            <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;[name=&#34;username&#34;]&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">testData</span>.<span style="color:#a6e22e">username</span>);
+            <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;[name=&#34;password&#34;]&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#a6e22e">testData</span>.<span style="color:#a6e22e">password</span>);
+            <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;[type=&#34;submit&#34;]&#39;</span>).<span style="color:#a6e22e">click</span>();
+
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">testData</span>.<span style="color:#a6e22e">success</span>) {
+                <span style="color:#75715e">// Check if the login is successful
+</span><span style="color:#75715e"></span>                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">url</span>().<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;include&#39;</span>, <span style="color:#e6db74">&#39;/dashboard&#39;</span>);
+            } <span style="color:#66d9ef">else</span> {
+                <span style="color:#75715e">// Check if the error message is displayed
+</span><span style="color:#75715e"></span>                <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.error-message&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#a6e22e">testData</span>.<span style="color:#a6e22e">error</span>);
+            }
+        });
+    });
+});
+</code></pre></div><p>Above example includes some additional checks that make our test more robust:</p>
+<ul>
+<li>it includes an additional property error or success in each test data set,</li>
+<li>it checks for validation error messages by checking if an error message element with a class of error-message contains the expected error message,</li>
+<li>if the login is successful, the test script checks if the URL of the next page includes &lsquo;/dashboard&rsquo;.</li>
+</ul>
+<p>It is important to note that those are certainly a very basic examples and fuzz testing can be much more complex and specific depending on what we want to test. We should always tailor our tests to the specific requirements and constraints of our application. It is also a good idea to check the test coverage and make sure that we are testing a representative set of inputs.</p>
+<p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
