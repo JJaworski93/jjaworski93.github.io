@@ -6,9 +6,18 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Aug 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Fuzz Testing with Cypress</title>
+      <title>Token Security automated test with Cypress</title>
+      <link>https://jjaworski93.github.io/post/post21/</link>
+      <pubDate>Thu, 01 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post21/</guid>
+      <description>Cypress allows us to interact with a webpage and its underlying resources, such as cookies. We can use Cypress to check if tokens are properly stored, encrypted, expired, and invalidated, as well as other security properties such as the &amp;lsquo;httpOnly&amp;rsquo; and &amp;lsquo;secure&amp;rsquo; attributes. The following examples will be based on an banking web app. First we log in, then we use the getCookie method to check for the cookies (tokens) in the browser.</description>
+    </item>
+    
+    <item>
+      <title>Fuzz Testing with Cypress - Introduction</title>
       <link>https://jjaworski93.github.io/post/post20/</link>
       <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
       

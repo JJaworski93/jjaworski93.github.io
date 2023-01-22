@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Token Security automated test with Cypress &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">September 1, 2022</span>
+                                
+                                <h1>Token Security automated test with Cypress</h1>
+                                <p>We can use Cypress to check if tokens are properly stored, encrypted, expired, and invalidated. How? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/securityCypress.jpg" alt="" /></div>
+                            
+                            <h2 id="cypress-allows-us-to-interact-with-a-webpage-and-its-underlying-resources-such-as-cookies-we-can-use-cypress-to-check-if-tokens-are-properly-stored-encrypted-expired-and-invalidated-as-well-as-other-security-properties-such-as-the-httponly-and-secure-attributes">Cypress allows us to interact with a webpage and its underlying resources, such as cookies. We can use Cypress to check if tokens are properly stored, encrypted, expired, and invalidated, as well as other security properties such as the &lsquo;httpOnly&rsquo; and &lsquo;secure&rsquo; attributes.</h2>
+<p>The following examples will be based on an banking web app. First we log in, then we use the <strong>getCookie method</strong> to check for the cookies (tokens) in the browser. After that we are going to use the <strong>should method</strong> provided by Cypress to check for specific properties of the cookies, such as <strong>httpOnly</strong>, <strong>secure</strong>, <strong>sameSite</strong> attributes and <strong>expiry time</strong> of the cookies.</p>
+<p>Additionally, it is worth to mention that Cypress allows us also to intercept server responses and check the status code and body of the response. It can be used to check if tokens are invalidated when certain actions like <strong>logout</strong>, <strong>session timeout</strong> or <strong>change of IP</strong> address.</p>
+<p>Let&rsquo;s see our example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Banking Web App security check&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">beforeEach</span>(() =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;https://ourbank.com/login&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly stored&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#username&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#password&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#login-button&#39;</span>).<span style="color:#a6e22e">click</span>();
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;httpOnly&#39;</span>, <span style="color:#66d9ef">true</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;secure&#39;</span>, <span style="color:#66d9ef">true</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly encrypted&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">cookie</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    });
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">cookie</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    });
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly expired&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;expiry&#39;</span>).<span style="color:#a6e22e">greaterThan</span>(Date.<span style="color:#a6e22e">now</span>());
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;expiry&#39;</span>).<span style="color:#a6e22e">greaterThan</span>(Date.<span style="color:#a6e22e">now</span>());
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly invalidated on logout&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#logout-button&#39;</span>).<span style="color:#a6e22e">click</span>();
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+  });
+});
+</code></pre></div><p>To clarify, the <strong>httpOnly</strong> and <strong>secure</strong> attributes are properties that can be set on cookies in order to improve their security.</p>
+<p>The httpOnly attribute tells the browser that the cookie should only be accessible to the server, and not to client-side scripts. This means that the cookie will not be available to JavaScript, and therefore cannot be read or modified by a malicious script that has been injected into the page. This helps to protect against certain types of <strong>cross-site scripting (XSS)</strong> attacks.</p>
+<p>The <strong>secure</strong> attribute tells the browser that the cookie should only be sent over a secure <strong>HTTPS</strong> connection. This means that the cookie will not be sent over an <strong>unencrypted HTTP</strong> connection, which can help to protect against eavesdropping and tampering.</p>
+<p>Both of these attributes are optional and can be set by the server when it sends the cookie to the browser. They can also be read and checked by client side scripts like in the case of Cypress test script.</p>
+<p>Let&rsquo;s have a look on second example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Banking Web App security check&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">beforeEach</span>(() =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;https://ourbank.com/login&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly stored&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#username&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#password&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#login-button&#39;</span>).<span style="color:#a6e22e">click</span>();
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;httpOnly&#39;</span>, <span style="color:#66d9ef">true</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;secure&#39;</span>, <span style="color:#66d9ef">true</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;sameSite&#39;</span>, <span style="color:#e6db74">&#39;strict&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;sameSite&#39;</span>, <span style="color:#e6db74">&#39;strict&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly encrypted&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">cookie</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    });
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">cookie</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ouruser&#39;</span>);
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">value</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;ourpassword123&#39;</span>);
+    });
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly expired&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;expiry&#39;</span>).<span style="color:#a6e22e">greaterThan</span>(Date.<span style="color:#a6e22e">now</span>());
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;have.property&#39;</span>, <span style="color:#e6db74">&#39;expiry&#39;</span>).<span style="color:#a6e22e">greaterThan</span>(Date.<span style="color:#a6e22e">now</span>());
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly invalidated on logout&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#logout-button&#39;</span>).<span style="color:#a6e22e">click</span>();
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly invalidated on session timeout&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">wait</span>(<span style="color:#ae81ff">15</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>); <span style="color:#75715e">// wait for 15 minutes
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;#token-expired-warning&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;be.visible&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;access_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">getCookie</span>(<span style="color:#e6db74">&#39;refresh_token&#39;</span>).<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;not.exist&#39;</span>);
+   });
+});
+</code></pre></div><p>In the above example, we wait for 15 minutes (sample time) to simulate the user being inactive for a certain period of time, after which the session should time out and the tokens should be invalidated.</p>
+<p>The purpose of this test is to ensure that the application properly invalidates the tokens after a certain period of inactivity, in this case 15 minutes. By waiting for 15 minutes before checking for the token expiration warning and the absence of the tokens in cookies, the test is verifying that the application is correctly handling session timeouts and invalidating tokens as expected.</p>
+<p>Note that, setting <strong>httpOnly</strong> and <strong>secure</strong> attributes on cookies is considered a best practice for securing cookies, but it is not a foolproof security measure. Other measures such as server-side validation of cookies, session management, and input validation should also be used to protect against potential security threats.</p>
+<p>Let&rsquo;s have a look on our last example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Bank Web App - Token invalidation on IP change&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">beforeEach</span>(() =&gt; {
+    <span style="color:#75715e">// Log in to the app
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">login</span>(<span style="color:#e6db74">&#39;username&#39;</span>, <span style="color:#e6db74">&#39;password&#39;</span>);
+  });
+
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;should check if tokens are properly invalidated on change of IP address&#39;</span>, () =&gt; {
+    <span style="color:#75715e">// Get the current IP address
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;https://api.ipify.org&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+      <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">currentIp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>;
+      <span style="color:#75715e">// Change the IP address
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;https://myip.com/change-ip&#39;</span>).<span style="color:#a6e22e">then</span>(() =&gt; {
+        <span style="color:#75715e">// Get the new IP address
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>(<span style="color:#e6db74">&#39;https://api.ipify.org&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+          <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">newIp</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>;
+          <span style="color:#75715e">// Assert that the IP address has changed
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">currentIp</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">not</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#a6e22e">newIp</span>);
+          <span style="color:#75715e">// Send a request to a protected endpoint
+</span><span style="color:#75715e"></span>          <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">request</span>({
+            <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/api/protected-endpoint&#39;</span>,
+            <span style="color:#a6e22e">failOnStatusCode</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+          }).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">response</span>) =&gt; {
+            <span style="color:#75715e">// Assert that the server returned a 401 status
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">status</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#ae81ff">401</span>);
+            <span style="color:#75715e">// Assert that the server responded with the correct error message
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">error</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;Invalid token&#39;</span>);
+          });
+        });
+      });
+    });
+  });
+});
+</code></pre></div><p>In this test, we are testing a scenario where the user is already logged in and their IP address changes while the session is still active. Therefore, we first log into the application and then obtain our current IP address using the <strong><a href="https://api.ipify.org">https://api.ipify.org</a></strong> endpoint, then we change the IP address using the <strong><a href="https://myip.com/change-ip">https://myip.com/change-ip</a></strong> endpoint, after that we get the new IP address and we compare it with the previous one. Finally we send a request to a protected endpoint and check if the server returns a 401 status code with the correct error message.</p>
+<p>It is worth to mention that in this script we used <a href="https://api.ipify.org">https://api.ipify.org</a> and <a href="https://myip.com/change-ip">https://myip.com/change-ip</a> as examples of endpoints that can be used to obtain and change the IP address. These endpoints are publicly available and can be used for testing purposes. Some other IP detection endpoints or services may be used instead, and it&rsquo;s also possible that the application uses a different way to change the IP address.</p>
+<p>In the above example, a <strong>&ldquo;protected endpoint&rdquo;</strong> refers to an API endpoint that requires an authenticated user to access. The user is authenticated by providing a valid token in the request headers. In this case, after the IP address change, the token should have been invalidated, and the server should return a 401 status code, indicating that the user is not authorized to access the endpoint.</p>
+<p>A protected endpoint is an endpoint in our application that requires a valid token to access it, typically it is behind an authentication layer, and it can only be accessed by authorized users.</p>
+<p>In the example, we send a request to the protected endpoint after the IP address has been changed, with the purpose of checking if the server returns a 401 status code, indicating that the user is not authorized to access the endpoint because the token is invalid.</p>
+<p>At this stage, it is also important to note that the protected endpoint could be any endpoint in the application that requires a valid token to access, it is not limited to a specific endpoint or a specific functionality in the application.</p>
+<p>Of course, this are just examples. Many things depend on the setup and the structure of our app. We always need to adjust the test script to match our app&rsquo;s structure and the specific actions we want to test. Also, Cypress can help us to test the security of tokens, but it can not guarantee it. We should also use other security measures such as server-side validation of tokens, session management, and input validation to protect against potential security threats.</p>
+<p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
