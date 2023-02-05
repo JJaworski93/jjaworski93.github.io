@@ -109,7 +109,7 @@
   .<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;be.visible&#39;</span>)
   .<span style="color:#a6e22e">and</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#e6db74">&#39;Internal server error&#39;</span>);
 </code></pre></div><p>In above example, we&rsquo;re intercepting a GET request to the <em>/api/users/1</em> route, and returning a mocked response with a status code of 500 and a body containing an error message of <em>&ldquo;Internal server error&rdquo;</em>. Then we visit <em>/users/1</em>, Cypress will make the GET request to <em>/api/users/1</em> and receive the mocked error message.</p>
-<p>Finally, we check if the error message is visible on the page and contains the text &ldquo;Internal server error&rdquo; using the cy.get(), .should() and .and() commands.</p>
+<p>Finally, we check if the error message is visible on the page and contains the text <em>&ldquo;Internal server error&rdquo;</em> using the <em>cy.get()</em>, <em>.should()</em> and <em>.and()</em> commands.</p>
 <p>You can also test different status codes, and test different edge cases. The key is to intercept the request and return the desired response.</p>
 <p>Let&rsquo;s have a look on a validation error test example:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">intercept</span>(<span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;/api/users&#39;</span>, {
