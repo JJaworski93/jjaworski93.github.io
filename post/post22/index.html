@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>HTTP - methods, headers, cookies, etc. &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">October 6, 2022</span>
+                                
+                                <h1>HTTP - methods, headers, cookies, etc.</h1>
+                                <p>What is an HTTP (Hypertext Transfer Protocol) request? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/http.png" alt="" /></div>
+                            
+                            <h2 id="an-http-hypertext-transfer-protocol-request-is-a-message-sent-by-a-client-such-as-a-web-browser-or-a-mobile-app-to-a-server-in-order-to-retrieve-or-send-information">An HTTP (Hypertext Transfer Protocol) request is a message sent by a client, such as a web browser or a mobile app, to a server in order to retrieve or send information.</h2>
+<p>When client makes an HTTP request to a server, the server processes the request and sends an appropriate response back to the client. This response can be a web page, an image, a file, or an error message, among other things.</p>
+<p>The above mentioned request includes various pieces of information, such as the method (e.g. GET, POST, PUT, DELETE), the endpoint (e.g. a specific URL), and any data or headers that are needed to complete the request.</p>
+<p>There are several types of <strong>HTTP methods</strong>:</p>
+<ul>
+<li>GET - to retrieve data.</li>
+<li>POST - to create data.</li>
+<li>PUT - to update data.</li>
+<li>DELETE - to delete data.</li>
+</ul>
+<p>The request also includes <strong>headers</strong> which provide additional information about the request, such as the <strong>Accept</strong> and <strong>Content-Type</strong> headers, which specify the format of the data being sent or received.</p>
+<p>The server receives the request, processes it, and then sends back a response, which includes a status code (e.g. 200 OK, 404 Not Found) and any data or headers that are needed to complete the response.</p>
+<p>HTTP is a <strong>stateless protocol</strong>, which means that the server does not maintain any information about the client between requests. Each request is independent of the previous one. This is the reason why cookies and sessions were introduced in the web. Cookies (and other mechanisms) can be used to maintain state between requests. It is important to test how your application handles state, especially if it relies on cookies or other stateful mechanisms.</p>
+<p>In summary, an HTTP request is a message sent by a client to a server to initiate an action, and the HTTP response is the message sent back by the server after it processes the request.</p>
+<p>Let&rsquo;s have a look on a few common <strong>HTTP status codes</strong> and their meanings:</p>
+<ul>
+<li>200 OK: The request was successful and the server returned the requested data.</li>
+<li>201 Created: The request was successful and a new resource was created as a result.</li>
+<li>204 No Content: The request was successful, but there is no data to return.</li>
+<li>400 Bad Request: The request was malformed or missing required parameters.</li>
+<li>401 Unauthorized: The request requires authentication, either through a missing or invalid token.</li>
+<li>403 Forbidden: The authenticated user does not have access to the requested resource.</li>
+<li>404 Not Found: The requested resource could not be found.</li>
+<li>500 Internal Server Error: An error occurred on the server.</li>
+</ul>
+<p>It is important to mention that the HTTP codes are not limited to the above codes and there are many other codes too which are specific to the context of the application. The error messages can also vary depending on the application and can be either a string or an object containing more details about the error.</p>
+<p>It is also important to handle these errors in the client side and show the appropriate messages to the user.</p>
+<p><strong>Network errors</strong>. These are errors that occur when there is a problem with the network connection between the client and the server. Examples of network errors include timeouts, connectivity issues, and DNS errors. These types of errors can be caused by a variety of factors such as poor internet connection, a problem with the router, or a problem with the server.</p>
+<p><strong>Server errors</strong>. These are errors that occur on the server side of an application. Examples of server errors include 500 Internal Server Error, 502 Bad Gateway and 503 Service Unavailable. These errors can be caused by problems with the server&rsquo;s configuration, a lack of resources, or a bug in the server-side code.</p>
+<p><strong>Invalid responses</strong>. These are responses that do not conform to the expected format or contain invalid data. For example, a response that is missing a required field or a response that contains an unexpected data type. These types of errors can be caused by bugs in the server-side code or by problems with the client&rsquo;s request.</p>
+<p>It is worth noting that different types of errors may require different types of testing and different tools. Network errors can be tested by simulating network conditions and measuring the application&rsquo;s behavior. Server errors can be tested by creating test cases that simulate different types of server errors and verifying that the application behaves correctly. Invalid responses can be tested by sending requests with different types of invalid data and verifying that the application returns the correct error messages.</p>
+<p>You must have heard the terms <strong>&ldquo;HTTP call&rdquo;</strong> and <strong>&ldquo;HTTP request&rdquo;</strong> in the past. Those are often used interchangeably to refer to the process of sending an HTTP message from a client to a server. However, there is a subtle difference between the two terms.</p>
+<p>An <strong>HTTP call</strong> refers to the act of initiating an HTTP request and receiving an HTTP response. It is a higher-level concept that encompasses both the request and the response, and it can include additional steps such as parsing the response and handling errors.</p>
+<p>An <strong>HTTP request</strong>, on the other hand, is a specific message sent by a client to a server. It includes a method (e.g. GET, POST), an endpoint (e.g. a specific URL), headers, and a body (if applicable).</p>
+<p>An <strong>HTTP response</strong> is the message sent back by the server in response to an HTTP request. It includes a status code, headers, and a body (if applicable).</p>
+<p>So, in short, an HTTP call refers to the whole process of requesting and receiving a response, while an HTTP request refers to the specific message sent by the client to the server.</p>
+<p>An <strong>HTTP header</strong> is a piece of information that is included in an HTTP request or response, and is used to provide additional context about the message. HTTP headers are key-value pairs, with the key being the name of the header and the value being its associated data.</p>
+<p>HTTP headers can be used to provide various types of information, such as:</p>
+<ul>
+<li><strong>Request headers</strong>:
+<ul>
+<li>Accept: Specifies the format of the data that the client can handle.</li>
+<li>Content-Type: Specifies the format of the data in the request body.</li>
+<li>Authorization: Provides authentication information for the request.</li>
+<li>User-Agent: Identifies the client software and version.</li>
+</ul>
+</li>
+<li><strong>Response headers</strong>:
+<ul>
+<li>Content-Type: Specifies the format of the data in the response body.</li>
+<li>Content-Length: Specifies the size of the response body.</li>
+<li>Server: Identifies the server software and version.</li>
+<li>Location: Specifies the URL of the resource that the client should access next.</li>
+</ul>
+</li>
+</ul>
+<p>Headers are used by the server to understand the request and by the client to understand the response. They can also be used for security, for example, the server can set a cookie in the Set-Cookie header of the response, that the client will have to use in the next requests in the Cookie header.</p>
+<p>It&rsquo;s important to note that header fields are case-insensitive, headers fields names are separated from their values by a colon, and headers fields can span multiple lines if the value contains whitespace.</p>
+<p>You must also have heard about <strong>Cookies</strong>. Cookies are small text files that are stored on a client&rsquo;s computer by a web server when the client visits a website. They are used to remember certain information about the user, such as their preferences or login credentials.</p>
+<p>Cookies are sent by the server to the client in the form of an <strong>HTTP header called &ldquo;Set-Cookie&rdquo;</strong> in the response. The browser then stores the cookie and returns it to the server in the &ldquo;Cookie&rdquo; header of subsequent requests.</p>
+<p>Cookies can be used for various purposes, such as:</p>
+<ul>
+<li>Storing user preferences, such as language settings or theme selection.</li>
+<li>Keeping track of the user&rsquo;s session, so the user doesn&rsquo;t have to re-enter their login credentials each time they visit the website.</li>
+<li>Storing shopping cart information for e-commerce websites.</li>
+<li>Tracking user behavior for analytics or advertising purposes.</li>
+</ul>
+<p>It is important to note that cookies are stored on the client-side, and they can be modified, deleted or blocked by the client.</p>
+<p>Cookies also have an <strong>expiration date</strong>, which can be set by the server, after that date the browser will delete the cookie. It is important to test that our application sets the correct expiration date, and that it behaves correctly when a cookie has expired.</p>
+<p><strong>Cookie Scope</strong>. Cookies have a scope, which determines which pages on a website can access them. It is important to test that our application sets the correct scope for each cookie, and that it behaves correctly when a cookie is not accessible.</p>
+<p><strong>Cookie Security</strong>. Cookies can be secured to prevent them from being accessed by malicious actors. It is important to test that our application sets the correct security settings for each cookie, and that it behaves correctly when a cookie is not secure.</p>
+<p>Additionally, cookies can be marked as <strong>&ldquo;secure&rdquo;</strong> and <strong>&ldquo;HTTPOnly&rdquo;</strong> which means that they will only be sent over a secure connection (HTTPS) and they can not be accessed by client-side scripts (javascript).</p>
+<p>Cookies are a simple and efficient way to store user data, but they can also pose security risks if they are not used properly.</p>
+<p>Overall, testing HTTP calls and cookies requires a combination of functional, performance and security testing, it&rsquo;s important to understand the behavior of cookies and how it affects the overall application and its interactions.</p>
+<p><strong>Caching</strong> is the process of storing frequently accessed data in a temporary storage area, such as memory, so that it can be quickly retrieved and used again without having to be recomputed or retrieved from the original data source.</p>
+<p>In the context of HTTP, caching can refer to the temporary storage of HTTP responses on a client (e.g. a web browser) or a server. This allows subsequent requests for the same resource to be served more quickly, as the data is already available in the cache. Caching can improve the performance of an application by reducing the number of round-trips to the server and by reducing the amount of data that needs to be transmitted over the network. Browsers can cache HTTP responses, including cookies.</p>
+<p>Caching can be controlled by various headers in the HTTP response, such as the <strong>&ldquo;Cache-Control&rdquo;</strong> header, which specifies how long the response can be cached and under what conditions it can be reused. When making an HTTP request, the client may also include headers such as <strong>&ldquo;If-Modified-Since&rdquo;</strong> or <strong>&ldquo;If-None-Match&rdquo;</strong> to indicate that it has a cached version of the resource and only wants to retrieve it again if it has changed on the server. t&rsquo;s important to test that your application sets the correct caching headers to prevent caching when it should not be cached and also to test how the application behaves when it receives a cached response.</p>
+<p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>

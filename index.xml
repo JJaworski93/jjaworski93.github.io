@@ -6,7 +6,25 @@
     <description>Recent content on Software Testing Blog - thebugger.io</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://jjaworski93.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mocking HTTP calls with Cypress</title>
+      <link>https://jjaworski93.github.io/post/post23/</link>
+      <pubDate>Thu, 03 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post23/</guid>
+      <description>Mocking HTTP calls allows us to test the behavior of our code under various conditions and isolate it from the external services it relies on, making our tests more reliable, repeatable and efficient. Mocking a HTTP call means to simulate the behavior of a real HTTP call in a controlled environment, typically during the test process. This is done by creating a mock object that mimics the interface of the real HTTP call.</description>
+    </item>
+    
+    <item>
+      <title>HTTP - methods, headers, cookies, etc.</title>
+      <link>https://jjaworski93.github.io/post/post22/</link>
+      <pubDate>Thu, 06 Oct 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://jjaworski93.github.io/post/post22/</guid>
+      <description>An HTTP (Hypertext Transfer Protocol) request is a message sent by a client, such as a web browser or a mobile app, to a server in order to retrieve or send information. When client makes an HTTP request to a server, the server processes the request and sends an appropriate response back to the client. This response can be a web page, an image, a file, or an error message, among other things.</description>
+    </item>
+    
     <item>
       <title>Token&#39;s Security testing with Cypress</title>
       <link>https://jjaworski93.github.io/post/post21/</link>
@@ -17,7 +35,7 @@
     </item>
     
     <item>
-      <title>Fuzz Testing with Cypress - Introduction</title>
+      <title>Fuzz Testing with Cypress - introduction</title>
       <link>https://jjaworski93.github.io/post/post20/</link>
       <pubDate>Thu, 04 Aug 2022 00:00:00 +0000</pubDate>
       

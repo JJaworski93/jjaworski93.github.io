@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+
+<html lang='en'>
+	<head>
+		<title>Mocking HTTP calls with Cypress &middot; Software Testing Blog - thebugger.io</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		
+		
+		<link rel="stylesheet" href="/assets/css/main.min.css">
+		
+		
+		
+		<noscript><link rel="stylesheet" href='/assets/css/noscript.css' /></noscript>
+	</head>
+
+	<body lang='en' class="is-preload">
+
+		
+			<div id="wrapper">
+
+                
+<header id="header">
+    <a href='/' class="logo">Software Testing Blog - thebugger.io</a>
+</header>
+
+                
+
+<nav id="nav">
+    <ul class="links">
+        <li class="active"><a href='/'>Software Testing Blog - thebugger.io</a></li>
+        
+        <li><a href='/#footer'>Contact</a></li>
+        
+        
+    </ul>
+    
+    <ul class="icons">
+        
+        
+        
+        
+        <li><a href="https://www.linkedin.com/in/thebugger/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+        
+        
+        <li><a href="https://github.com/JJaworski93/" class="icon fa-github"><span class="label">GitHub</span></a></li>
+        
+        
+        
+        
+        
+    </ul>
+    
+</nav>
+
+
+				
+					<div id="main">
+
+						
+                        <section class="post">
+                            <header class="major">
+                                
+                                <span class="date">November 3, 2022</span>
+                                
+                                <h1>Mocking HTTP calls with Cypress</h1>
+                                <p>Mocking HTTP calls can greatly improve the reliability, repeatability, and performance of your tests. How? Let&#39;s find out.</p>
+                            </header>
+                            
+                            <div class="image main"><img src="/images/cypress.png" alt="" /></div>
+                            
+                            <h2 id="mocking-http-calls-allows-us-to-test-the-behavior-of-our-code-under-various-conditions-and-isolate-it-from-the-external-services-it-relies-on-making-our-tests-more-reliable-repeatable-and-efficient">Mocking HTTP calls allows us to test the behavior of our code under various conditions and isolate it from the external services it relies on, making our tests more reliable, repeatable and efficient.</h2>
+<p><strong>Mocking a HTTP</strong> call means to simulate the behavior of a real HTTP call in a controlled environment, typically during the test process. This is done by creating a <strong>mock object</strong> that mimics the interface of the real HTTP call. However, instead of making a network request, it returns pre-determined data. The main advantage of mocking HTTP calls is that it allows us to test the behavior of our code without relying on the availability or accuracy of external services.</p>
+<p>Mocking HTTP calls can be used for a variety of purposes, including:</p>
+<ul>
+<li>
+<p>isolating the code under test - when checking a piece of code that makes an HTTP call, we can use a mock to isolate that code and test it independently of the external service it&rsquo;s calling.</p>
+</li>
+<li>
+<p>testing error handling - with a mock, we can simulate various types of errors that may occur during an HTTP call, such as a timeout or a connection refused error, and test how our code handles them.</p>
+</li>
+<li>
+<p>testing edge cases - a mock allows us to test how your code behaves in certain edge cases, such as when the HTTP call returns an unexpected status code or an empty response.</p>
+</li>
+<li>
+<p>testing performance - by using a mock, we can simulate various response times and test the performance of our code under different conditions.</p>
+</li>
+<li>
+<p>controlling the test environment - for example during the integration tests, it&rsquo;s often difficult to control the state of the external service we&rsquo;re calling. A mock allows us to have complete control over the inputs and outputs of the HTTP call, making it easier to write repeatable and reliable tests.</p>
+</li>
+<li>
+<p>avoiding unnecessary network traffic - mocking an HTTP call can also be useful when we want to write a test, but we don&rsquo;t want to put unnecessary load on the external service or when we don&rsquo;t have access to external service.</p>
+</li>
+</ul>
+<p>Cypress allows us test the entire lifecycle of HTTP requests within our application. It provides also a feature called <strong>cy.intercept</strong> that can be used to mock HTTP calls. With this feature, we can intercept network requests and provide our own custom response, instead of making a real network request. This allows us to test the behavior of our code without relying on the availability or accuracy of external services.</p>
+<p>We can use cy.intercept to mock any type of network request, including HTTP and HTTPS requests. We can also use it to intercept specific routes, methods, or even specific request bodies.</p>
+<p>Let&rsquo;s have a look on an example of how we can use cy.intercept to mock an HTTP call in Cypress:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">intercept</span>(<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;/api/users/1&#39;</span>, {
+  <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">500</span>,
+  <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Internal server error&#39;</span>
+  }
+});
+
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;/users/1&#39;</span>);
+
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.error-message&#39;</span>)
+  .<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;be.visible&#39;</span>)
+  .<span style="color:#a6e22e">and</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#e6db74">&#39;Internal server error&#39;</span>);
+</code></pre></div><p>In above example, we&rsquo;re intercepting a GET request to the <em>/api/users/1</em> route, and returning a mocked response with a status code of 500 and a body containing an error message of <em>&ldquo;Internal server error&rdquo;</em>. Then we visit <em>/users/1</em>, Cypress will make the GET request to <em>/api/users/1</em> and receive the mocked error message.</p>
+<p>Finally, we check if the error message is visible on the page and contains the text &ldquo;Internal server error&rdquo; using the cy.get(), .should() and .and() commands.</p>
+<p>You can also test different status codes, and test different edge cases. The key is to intercept the request and return the desired response.</p>
+<p>Let&rsquo;s have a look on a validation error test example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">intercept</span>(<span style="color:#e6db74">&#39;POST&#39;</span>, <span style="color:#e6db74">&#39;/api/users&#39;</span>, {
+  <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">400</span>,
+  <span style="color:#a6e22e">body</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Validation Error&#39;</span>,
+    <span style="color:#a6e22e">messages</span><span style="color:#f92672">:</span> {
+      <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Email is invalid&#39;</span>,
+      <span style="color:#a6e22e">password</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Password must be at least 8 characters long&#39;</span>
+    }
+  }
+});
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;input[name=&#34;email&#34;]&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;invalid-email&#39;</span>);
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;input[name=&#34;password&#34;]&#39;</span>).<span style="color:#a6e22e">type</span>(<span style="color:#e6db74">&#39;123&#39;</span>);
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;button[type=&#34;submit&#34;]&#39;</span>).<span style="color:#a6e22e">click</span>();
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.validation-error-message&#39;</span>)
+  .<span style="color:#a6e22e">should</span>(<span style="color:#e6db74">&#39;be.visible&#39;</span>)
+  .<span style="color:#a6e22e">and</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#e6db74">&#39;Validation Error&#39;</span>);
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.validation-error-message&#39;</span>)
+  .<span style="color:#a6e22e">and</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#e6db74">&#39;Email is invalid&#39;</span>);
+<span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;.validation-error-message&#39;</span>)
+  .<span style="color:#a6e22e">and</span>(<span style="color:#e6db74">&#39;contain&#39;</span>, <span style="color:#e6db74">&#39;Password must be at least 8 characters long&#39;</span>);
+</code></pre></div><p>In this example, we&rsquo;re intercepting a POST request to the <em>/api/users</em> route, and returning a mocked response with a status code of 400 and a body containing validation error messages. We then fill in the form with invalid data, submit it and check that the error message displayed on the page contains the text <em>&ldquo;Validation Error&rdquo;</em> and the specific validation error messages <em>&ldquo;Email is invalid&rdquo;</em> and <em>&ldquo;Password must be at least 8 characters long&rdquo;</em>.</p>
+<p>In below example, we are going to test a user&rsquo;s country of origin:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#a6e22e">describe</span>(<span style="color:#e6db74">&#39;Testing user country&#39;</span>, () =&gt; {
+  <span style="color:#a6e22e">it</span>(<span style="color:#e6db74">&#39;Mocking an API call to get user country&#39;</span>, () =&gt; {
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">server</span>();
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">route</span>({
+      <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>,
+      <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;https://api.oururl.com/user-location&#39;</span>,
+      <span style="color:#a6e22e">response</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">country</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Poland&#39;</span> },
+    }).<span style="color:#a6e22e">as</span>(<span style="color:#e6db74">&#39;getUserCountry&#39;</span>);
+
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">visit</span>(<span style="color:#e6db74">&#39;/&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">wait</span>(<span style="color:#e6db74">&#39;@getUserCountry&#39;</span>);
+    <span style="color:#a6e22e">cy</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;@getUserCountry&#39;</span>).<span style="color:#a6e22e">its</span>(<span style="color:#e6db74">&#39;response.body&#39;</span>).<span style="color:#a6e22e">then</span>((<span style="color:#a6e22e">res</span>) =&gt; {
+      <span style="color:#a6e22e">expect</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">country</span>).<span style="color:#a6e22e">to</span>.<span style="color:#a6e22e">equal</span>(<span style="color:#e6db74">&#39;Poland&#39;</span>);
+    });
+  });
+});
+</code></pre></div><p>In above example, <em>cy.server()</em> starts the server and <em>cy.route()</em> creates a stub for the GET request to <em><a href="https://api.oururl.com/user-location">https://api.oururl.com/user-location</a></em>. The stub returns a JSON response, which is defined in the response property of the <em>cy.route() call</em>, representing the user&rsquo;s location data. We name the stub using an alias <em>.as(&lsquo;getUserCountry&rsquo;)</em> for later reference. Finally, we use <em>cy.wait()</em> to wait for the stubbed response, and <em>cy.get()</em> to access the response body. Then, we pass the response body to <em>.then()</em> where we can write our assertions to verify that the country returned is as expected.</p>
+<p>Hope this article was useful.</p>
+<p>Thanks for reading!</p>
+
+
+                            
+                            
+                            
+                        </section>
+
+					</div>
+
+                    
+
+<footer id="footer">
+    
+    <section class="split contact">
+        
+        
+        
+        
+        <section>
+            <h3>Social</h3>
+            <ul class="icons alt">
+                
+                
+                
+                
+                <li><a href="https://www.linkedin.com/in/thebugger/" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                
+                
+                <li><a href="https://github.com/JJaworski93/" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+            </ul>
+        </section>
+        
+    </section>
+</footer>
+
+                    
+<div id="copyright">
+    <ul><li>&copy; Software Testing Blog - thebugger.io</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li><li>Hugo Port: <a href="https://curtistimson.co.uk">curttimson</a></li></ul>
+</div>
+
+
+            </div>
+            
+            
+
+
+
+
+
+
+
+
+
+
+<script src='/assets/js/bundle.js'></script>
+
+
+	</body>
+</html>
