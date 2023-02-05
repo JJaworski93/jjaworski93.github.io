@@ -150,7 +150,7 @@
     });
   });
 });
-</code></pre></div><p>In above example, <em>cy.server()</em> starts the server and <em>cy.route()</em> creates a stub for the GET request to <em><a href="https://api.oururl.com/user-location">https://api.oururl.com/user-location</a></em>. The stub returns a JSON response, which is defined in the response property of the <em>cy.route() call</em>, representing the user&rsquo;s location data. We name the stub using an alias <em>.as(&lsquo;getUserCountry&rsquo;)</em> for later reference. Finally, we use <em>cy.wait()</em> to wait for the stubbed response, and <em>cy.get()</em> to access the response body. Then, we pass the response body to <em>.then()</em> where we can write our assertions to verify that the country returned is as expected.</p>
+</code></pre></div><p>In above example, <em>cy.server()</em> starts the server and <em>cy.route()</em> creates a stub for the GET request to <em>api.oururl.com/user-location</em>. The stub returns a JSON response, which is defined in the response property of the <em>cy.route() call</em>, representing the user&rsquo;s location data. We name the stub using an alias <em>.as(&lsquo;getUserCountry&rsquo;)</em> for later reference. Finally, we use <em>cy.wait()</em> to wait for the stubbed response, and <em>cy.get()</em> to access the response body. Then, we pass the response body to <em>.then()</em> where we can write our assertions to verify that the country returned is as expected.</p>
 <p>Hope this article was useful.</p>
 <p>Thanks for reading!</p>
 
